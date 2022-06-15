@@ -1,6 +1,6 @@
 # Projeto Passwords
 
-O dataset apresentado compreende a listagem de mais de 600 mil senhas, as quais o aluno deve fazer a classificação, afiltragem e a ordenação.
+O dataset apresentado compreende a listagem de mais de 600 mil senhas, as quais o aluno deve fazer a classificação, a filtragem e a ordenação.
 
 Você pode baixar o dataset diretamente através do [link](https://drive.google.com/file/d/1-8WPvcqCEf7dAnuRTxrdCBln81o_9X4S/view). O arquivo a ser considerado é o passwords.csv
 
@@ -16,7 +16,7 @@ Para a classificação, devemos considerar como entrada dos dados o arquivo enti
  
 
 ## Transformações
-Para as tranforamções, devemos considerar como entrada dos dados o arquivo entitulado password_classifier.csv
+Para as tranformações, devemos considerar como entrada dos dados o arquivo entitulado password_classifier.csv
 
 1. Transformar data para o formato a seguir DD/MM/AAAA
    - Gerar um arquivo chamado passwords_formated_data.csv
@@ -32,7 +32,9 @@ Sobre os casos, para efeito de análise dos algoritmos deve-se trabalhar com 3 c
 
 1. Ordenar o arquivo completo de senhas pelo campo length em ordem decrescente.
    - Deve-se gerar um arquivo para cada algoritmo de ordenação e o tipo de caso. Por exemplo, *passwords_length_insertionSort_medioCaso.csv, passwords_length_insertionSort_piorCaso.csv, passwords_length_insertionSort_melhorCaso.csv*
+
 2. Ordenar o arquivo completo de senhas por mês, (OBS: deve-se obter o mês a partir da data já formatada) da coluna data, de forma crescente.
    - Deve-se gerar um arquivo para cada algoritmo de ordenação e o tipo de caso. Por exemplo, *passwords_data_month_insertionSort_medioCaso.csv, passwords_month_data_insertionSort_piorCaso.csv, passwords_data_month_insertionSort_melhorCaso.csv*
+
 3. Ordenar o arquivo completo de senhas pela coluna data de forma crescente.
    - Deve-se gerar um arquivo para cada algoritmo de ordenação e o tipo de caso. Por exemplo, *passwords_data_insertionSort_medioCaso.csv, passwords_month_insertionSort_piorCaso.csv, passwords_data_insertionSort_melhorCaso.csv*
