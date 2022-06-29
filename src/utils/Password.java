@@ -17,12 +17,11 @@ public class Password {
         String arr[] = { veryCrap, crap, weak, good, veryGood };
 
         int i = 0;
-        for (; i < arr.length; i++){
-            if(pass.matches(arr[i])) break;
+        for (; i < arr.length; i++) {
+            if (pass.matches(arr[i]))
+                break;
         }
-        
 
-        
         return i;
     }
 
