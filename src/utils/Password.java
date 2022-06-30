@@ -2,7 +2,8 @@ package src.utils;
 
 public class Password {
 
-    public int classifyPassword(String pass) {
+    private String[] classificationName = { "Muito Ruim", "Ruim", "Fraca", "Boa", "Muito Boa", "N/A" };
+    public String classifyPassword(String pass, boolean verbose) {
 
         String veryCrap = "^([0-9]{1,4}|[a-z]{1,4}|[A-Z]{1,4}|[^A-Za-z0-9]{1,4})$";
 
@@ -22,7 +23,7 @@ public class Password {
                 break;
         }
 
-        return i;
+        return verbose ? classificationName[i] : String.valueOf(i);
     }
 
 }

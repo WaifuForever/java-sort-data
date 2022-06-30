@@ -23,28 +23,55 @@ public class ArrayHandler {
     }
 
     public static String[] pushIntoArray(String[] arr, String element) {
-       
+
         String[] newArray = new String[arr.length + 1];
 
         for (int i = 0; i < arr.length; i++) {
             newArray[i] = arr[i];
         }
-       
+
         newArray[newArray.length - 1] = element;
-        //System.out.println(Arrays.toString(newArray));
+        // System.out.println(Arrays.toString(newArray));
         return newArray;
     }
 
+    public static String concatArray(String[] array) {
+        String temp = Arrays.toString(array);
+        return temp.substring(1, temp.length() - 1).replace(", ", ",");
+
+    }
+
+    public static String concatArray(String[] array, String inBetween) {
+        String temp = "";
+        for (int i = 0; i < array.length - 1; i++) {
+            temp += array[i] + inBetween;
+        }
+
+        temp += array[array.length - 1];
+        return temp;
+
+    }
+
+    public static <T> T[] reverseArray(T[] arr) {
+        T[] temp = arr.clone();
+        int index = 0;
+        for (int i = arr.length - 1; i >= 0; i--) {
+            temp[index] = arr[i];
+            index++;
+        }
+       return temp;
+    }
+
     public static int[] pushIntoArray(int[] arr, int element) {
-       
+
         int[] newArray = new int[arr.length + 1];
 
         for (int i = 0; i < arr.length; i++) {
             newArray[i] = arr[i];
         }
-       
+
         newArray[newArray.length - 1] = element;
-        //System.out.println(Arrays.toString(newArray));
+        // System.out.println(Arrays.toString(newArray));
         return newArray;
     }
 }

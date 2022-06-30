@@ -4,7 +4,18 @@ public class CustomArray<T> {
 
     private int size = 0;
 
-    T[] array = (T[]) new Object[50];
+    public CustomArray(T[] array) {
+        this.array = (T[]) new Object[array.length];
+        for (int i = 0; i < array.length; i++) {
+            this.array[i] = array[i];
+        }
+    }
+
+    public CustomArray() {
+        array = (T[]) new Object[50];
+    }
+
+    T[] array;
 
     public void add(T element) {
         if (size == array.length)
