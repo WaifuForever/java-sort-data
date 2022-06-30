@@ -77,7 +77,7 @@ public class FileHandler {
     }
 
     public void write(String filename, CustomArray<String> data) {
-        try (PrintWriter newFile = new PrintWriter("output/2" + filename, "UTF-8")) {
+        try (PrintWriter newFile = new PrintWriter("output/" + filename, "UTF-8")) {
 
             for (int i = 0; i < data.getSize(); i++) {
                 newFile.println(data.get(i));
