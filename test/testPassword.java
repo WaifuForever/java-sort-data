@@ -39,7 +39,7 @@ public class testPassword {
             for (int j = 0; j < goods[i].length; j++){
                 if(!compare(goods[i][j], i)){
                     System.out.printf("%s is not %s - ", goods[i][j], classification[i]);
-                    System.out.printf("%s is %s\n\n", goods[i][j], classification[p1.classifyPassword(goods[i][j])]);
+                    System.out.printf("%s is %s\n\n", goods[i][j], classification[Integer.parseInt(p1.classifyPassword(goods[i][j], false))]);
                 }
                    
             }
@@ -54,6 +54,6 @@ public class testPassword {
     }
 
     private static boolean compare(String pass, int quality) {
-        return quality == p1.classifyPassword(pass);
+        return quality == Integer.parseInt(p1.classifyPassword(pass, false));
     }
 }
