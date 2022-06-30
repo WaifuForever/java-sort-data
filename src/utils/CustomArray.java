@@ -1,7 +1,5 @@
 package src.utils;
 
-import java.util.Random;
-
 public class CustomArray<T> {
 
     private int size = 0;
@@ -42,24 +40,6 @@ public class CustomArray<T> {
         }
         array = temp;
 
-    }
-
-    public static void shuffleArray(int[] arr) {
-        Random r = new Random();
-
-        for (int i = arr.length - 1; i > 0; i--) {
-            int j = r.nextInt(i + 1);
-            int temp = arr[i];
-            arr[i] = arr[j];
-            arr[j] = temp;
-
-        }
-    }
-
-    public static boolean isSorted(int[] array, int n) {
-        if (n == 1 || n == 0)
-            return true;
-        return array[n - 2] <= array[n - 1] && isSorted(array, n - 1);
     }
 
 }

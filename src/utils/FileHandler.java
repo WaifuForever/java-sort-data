@@ -5,17 +5,17 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class File {
+public class FileHandler {
 
     // String fileNameDownloaded = "passwords.csv";
 
     public static CustomArray read(String filename) {
         CustomArray data = new CustomArray<String[]>();
-        try (FileInputStream inputStream = new FileInputStream(filename);
+        try (FileInputStream inputStream = new FileInputStream("output/" + filename);
                 Scanner sc = new Scanner(inputStream, "UTF-8");) {
             // File passwords_classifier = new File("passwords_classifier.csv");
 
-            String lineOne = sc.nextLine();
+            //String lineOne = sc.nextLine();
 
             // PrintWriter passwords_classifier = new PrintWriter(fileNameClassifier,
             // "UTF-8");
@@ -44,13 +44,21 @@ public class File {
 
         return data;
     }
-    /*
+    
     public static void main(String[]args){
         CustomArray temp = read("output/passwords.csv");
+        String[] arr = new String[((String[]) temp.get(0)).length+1];
+
+
+        for(int i=0; i < arr.length-1; i++){
+            arr[i] = ((String[]) temp.get(0))[i];
+        }
+        arr[arr.length-1] = "classification";
+        temp.update(0, arr);
         System.out.println(temp.getSize());
         for (int i=0; i < temp.getSize(); i++){
             System.out.println(Arrays.toString((String[]) temp.get(i)));
         }
     }
-    */
+    
 }
