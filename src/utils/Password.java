@@ -3,6 +3,7 @@ package src.utils;
 public class Password {
 
     private String[] classificationName = { "Muito Ruim", "Ruim", "Fraca", "Boa", "Muito Boa", "N/A" };
+    private String[] bestClassificationName = { "Boa", "Muito Boa" };
     public String classifyPassword(String pass, boolean verbose) {
 
         String veryCrap = "^([0-9]{1,4}|[a-z]{1,4}|[A-Z]{1,4}|[^A-Za-z0-9]{1,4})$";
@@ -25,5 +26,7 @@ public class Password {
 
         return verbose ? classificationName[i] : String.valueOf(i);
     }
-
+    public String[] getBestClassificationNames(){
+        return bestClassificationName;
+    }
 }

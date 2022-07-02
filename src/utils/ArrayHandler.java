@@ -15,6 +15,13 @@ public class ArrayHandler {
 
         }
     }
+    public static <T> void worstCase(T[] array){
+
+    };
+    public static <T> void bestCase (T[] array){
+
+    };
+    
 
     public static boolean isSorted(int[] array, int n) {
         if (n == 1 || n == 0)
@@ -52,14 +59,17 @@ public class ArrayHandler {
 
     }
 
-    public static <T> T[] reverseArray(T[] arr) {
-        T[] temp = arr.clone();
+    public static <T> void reverseArray(T[] arr) {
         int index = 0;
         for (int i = arr.length - 1; i >= 0; i--) {
-            temp[index] = arr[i];
+            T ax = arr[index];
+            if(index<i){
+                arr[index] = arr[i];
+                arr[i] = ax;
+            }
             index++;
         }
-       return temp;
+       //return temp;
     }
 
     public static int[] pushIntoArray(int[] arr, int element) {
