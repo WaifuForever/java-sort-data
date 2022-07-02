@@ -56,7 +56,7 @@ public class FileHandler {
             // passwords_formated_data.println(lineOne.concat(",classification"));
             int i = 0;
             while (sc.hasNextLine()) {
-                if (i > limit)
+                if (i > limit & limit!=0)
                     break;
                 data.add(sc.nextLine());
 
