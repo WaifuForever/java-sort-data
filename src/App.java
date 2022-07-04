@@ -1,7 +1,11 @@
 package src;
+
 import java.io.IOException;
+
+import src.interfaces.Callable;
 import src.utils.Password;
 import src.utils.ArrayHandler;
+import src.utils.CallableUtils;
 import src.utils.CustomArray;
 import src.utils.CustomTag;
 import src.utils.FileHandler;
@@ -11,21 +15,24 @@ public class App {
 
     private static FileHandler fh = new FileHandler();
 
+    private static CallableUtils callableUtils = new CallableUtils();
+
     public static void main(String[] args) throws IOException {
 
-        String[] filenames = { "passwords.csv", "passwords_classifier.csv",
+        String[] filenames = { "passwords.csv", "passwords_classifier.csv", "filtered_passwords_classifier.csv",
                 "passwords_formated_data.csv" };
 
         CustomArray<String> data = fh.read(filenames[0], 200);
 
         data.update(0, data.get(0) + ",classification");
-
+        // generates passwords_classifier
         for (int i = 1; i < data.getSize(); i++) {
             String passTier = p1.classifyPassword(((String) data.get(i)).split(",", 4)[1], true);
             data.update(i, data.get(i) + "," + passTier);
 
         }
-        fh.write(filenames[1], data);
+        fh.write(filenames[1], data, 0);
+        fh.write(filenames[2], data, callableUtils.filterCallable, 4);
 
         for (int i = 1; i < data.getSize(); i++) {
             String[] line = ((String) data.get(i)).split(",", 5);
@@ -33,14 +40,15 @@ public class App {
             data.update(i, ArrayHandler.concatArray(line));
 
         }
-        fh.write(filenames[2], data);
-
-        CustomTag ct = new CustomTag();
-        CustomArray<Object[]> data2 = ct.toCustomTag(data);
-        System.out.println(data2.getSize());
-        for (int i = 0; i < data2.getSize(); i++) {
-            ArrayHandler.printArray(data2.get(i));
-        }
+        fh.write(filenames[3], data, 0);
+        /*
+         * CustomTag ct = new CustomTag();
+         * CustomArray<Object[]> data2 = ct.toCustomTag(data);
+         * System.out.println(data2.getSize());
+         * for (int i = 0; i < data2.getSize(); i++) {
+         * ArrayHandler.printArray(data2.get(i));
+         * }
+         */
 
     }
 

@@ -4,6 +4,8 @@ import java.io.FileInputStream;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
+import src.interfaces.Callable;
+
 public class FileHandler {
 
     // String fileNameDownloaded = "passwords.csv";
@@ -76,10 +78,24 @@ public class FileHandler {
         return data;
     }
 
-    public void write(String filename, CustomArray<String> data) {
+    public void write(String filename, CustomArray<String> data, Callable callable, int index) {
         try (PrintWriter newFile = new PrintWriter("output/" + filename, "UTF-8")) {
 
             for (int i = 0; i < data.getSize(); i++) {
+                if (callable.call(((String) data.get(i)).split(",")[index]))
+                    newFile.println(data.get(i));
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
+
+    public void write(String filename, CustomArray<String> data, int index) {
+        try (PrintWriter newFile = new PrintWriter("output/" + filename, "UTF-8")) {
+
+            for (int i = index; i < data.getSize(); i++) {
                 newFile.println(data.get(i));
             }
 
