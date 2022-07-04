@@ -2,48 +2,79 @@ package src;
 import java.io.IOException;
 import src.utils.Password;
 import src.utils.ArrayHandler;
-import src.utils.CustomArray;
+import src.utils.CustomBiArray;
 import src.utils.FileHandler;
+import src.utils.FilterCallable;
+import src.utils.ManagerFieldLength;
+import src.algorithms.Selection;
+import src.algorithms.Bubble;
+import src.algorithms.Insertion;
+import src.algorithms.Quick;
+import src.algorithms.Radix;
+import src.utils.OrderDate;
+import src.utils.OrderLength;
+
+import src.interfaces.Sorter;
 
 public class App {
     private static Password p1 = new Password();
 
     private static FileHandler fh = new FileHandler();
 
+    private static void sortFile(Sorter sort, CustomBiArray<String> data){
+        sort.sortArray(data);
+        fh.write(sort.getClass().getSimpleName() + ".csv", data);
+       
+    }
+
+
     public static void main(String[] args) throws IOException {
 
         String[] filenames = { "passwords.csv", "passwords_classifier.csv",
                 "passwords_formated_data.csv", "best_password_classifier.csv" };
 
-        CustomArray<String> data = fh.read(filenames[0], 0);
-        CustomArray<String> filtered_data = new CustomArray<String>();
-
-        data.update(0, data.get(0) + ",classification");
-
-        for (int i = 1; i < data.getSize(); i++) {
-            String passTier = p1.classifyPassword(((String) data.get(i)).split(",", 4)[1], true);
-            data.update(i, data.get(i) + "," + passTier);
-            if(passTier == p1.getBestClassificationNames()[0] | passTier == p1.getBestClassificationNames()[1]){
-                filtered_data.add(data.get(i) + "," + passTier);
-            }
-        }
-        fh.write(filenames[1], data);
-        fh.write(filenames[3], filtered_data);
+        CustomBiArray<String> data = fh.read(filenames[0], 100);
+        data.updateIntern(0, 4, "classification");
         
+        for (int i = 1; i < data.getSize(); i++) {
+            //ArrayHandler.printArray((String[])data.get(i));
+            String passTier = p1.classifyPassword( data.get(i)[1], true);
+            data.updateIntern(i, 4, passTier);
+        
+        }
+        fh.write(filenames[1], data); 
+        fh.write(filenames[3], data, new FilterCallable(), 4);
+        //fh.write(filenames[2], data, new FilterCallable());
+
+        //data == data[][]
 
         for (int i = 1; i < data.getSize(); i++) {
-            String[] line = ((String) data.get(i)).split(",", 5);
-            line[3] = formateDate(line[3]);
-            data.update(i, ArrayHandler.concatArray(line));
-
+           
+            data.updateIntern(i, 3, formateDate(data.get(i)[3]));
         }
+        fh.write(filenames[2], data);
+
+        Radix sort = new Radix(new ManagerFieldLength(), 1);
+        sort.sortArray(data);
+        fh.write("Radix.csv", data);
+        /*
+        sortFile(new Selection(1), data);;
+        sortFile(new Quick(1), data);
+        sortFile(new Bubble(1), data);
+        sortFile(new Insertion(1), data);
+      */
+
+        
+        /*
+
+
         fh.write(filenames[2], data);
 
         System.out.println(data.getSize());
         for (int i = 0; i < data.getSize(); i++) {
             System.out.println(data.get(i));
         }
-
+        */
     }
 
     public static String formateDate(String date) {// 2016-12-18 03:21:51

@@ -29,4 +29,7 @@ public class Password {
     public String[] getBestClassificationNames(){
         return bestClassificationName;
     }
+    public boolean isBestPassword(String pass){
+        return pass == bestClassificationName[0] | pass == bestClassificationName[1];
+    }
 }

@@ -16,7 +16,7 @@ public class ArrayHandler {
         }
     }
     public static <T> void worstCase(T[] array){
-
+        reverseArray(array);
     };
     public static <T> void bestCase (T[] array){
 
@@ -27,6 +27,10 @@ public class ArrayHandler {
         if (n == 1 || n == 0)
             return true;
         return array[n - 2] <= array[n - 1] && isSorted(array, n - 1);
+    }
+
+    public static <T> void printArray(T[] array){
+        System.out.println(Arrays.toString(array));
     }
 
     public static String[] pushIntoArray(String[] arr, String element) {
@@ -46,6 +50,16 @@ public class ArrayHandler {
         String temp = Arrays.toString(array);
         return temp.substring(1, temp.length() - 1).replace(", ", ",");
 
+    }
+
+    public static <T> void swap(CustomBiArray<T> arr, int i, int j) {
+        System.out.println("----------------");
+        //ArrayHandler.printArray(arr.get(i).clone());
+        //ArrayHandler.printArray(arr.get(j).clone());
+        T[] temp = arr.get(i);
+        arr.update(i, arr.get(j).clone());
+        arr.update(j, temp.clone());
+        //ArrayHandler.printArray(arr.get(i).clone());
     }
 
     public static String concatArray(String[] array, String inBetween) {

@@ -1,5 +1,8 @@
 package src.algorithms;
 
+import src.interfaces.Callable2;
+import src.utils.CustomBiArray;
+
 public class Counting implements Sorter {
 
     private void countingSort(int[] arr) {
@@ -40,4 +43,22 @@ public class Counting implements Sorter {
         countingSort(arr);
 
     }
+
+  	@Override
+	public <T> void sortArray(CustomBiArray<T> arr, Callable2 func) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void bestCase(CustomBiArray<String> arr) {
+		// when the elements are suited for countingSort
+		
+	}
+
+	@Override
+	public void worstCase(CustomBiArray<String> arr) {
+		// when the range k of the elements is significantly larger than the other elements
+		
+	}
 }

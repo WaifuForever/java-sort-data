@@ -49,4 +49,16 @@ public class Merge implements Sorter {
         mergeSort(arr);
 
     }
+
+    @Override
+    public void bestCase(CustomBiArray<String> arr) {
+        //  when the largest element of one sorted sub-list is smaller than the first element of its opposing sub-list, for every merge step that occurs
+        
+    }
+
+    @Override
+    public void worstCase(CustomBiArray<String> arr) {
+        // A certain combination that will result in max numbers of comparison being made.
+        
+    }
 }

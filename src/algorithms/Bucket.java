@@ -1,4 +1,6 @@
 package src.algorithms;
+import src.utils.CustomBiArray;
+import src.interfaces.Sorter;
 
 public class Bucket implements Sorter {
     private class CustomArray {
@@ -105,7 +107,7 @@ public class Bucket implements Sorter {
         }
         int marker = 0;
         for (int i = 0; i < chunkSize; i++) {
-            new Insertion2().sortArray(buckets[i].array());
+            new Insertion().sortArray(buckets[i].array());
             for (int j = 0; j < chunkSize; j++) {
                 if (buckets[i].size > j) {
                     arr[marker] = buckets[i].get(j);
@@ -121,4 +123,17 @@ public class Bucket implements Sorter {
         bucketSort(arr);
 
     }
+
+	@Override
+	public void bestCase(CustomBiArray<String> arr) {
+		// when the data being sorted can be distributed between the buckets perfectly
+	}
+
+	@Override
+	public void worstCase(CustomBiArray<String> arr) {
+		// when the data being sorted are cluster in one single buccket
+		
+	}
+
+    
 }
