@@ -20,7 +20,7 @@ Para as tranformações, devemos considerar como entrada dos dados o arquivo ent
 
 1. Transformar data para o formato a seguir DD/MM/AAAA
    - Gerar um arquivo chamado passwords_formated_data.csv
-2. Filtrar senha pela categória Boa e Muito Boa.
+2. Filtrar senha pela categoria Boa e Muito Boa.
    - Gerar um arquivo chamado passwords_classifier.csv
 
 ## Ordenações

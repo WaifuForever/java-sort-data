@@ -62,6 +62,10 @@ public class ArrayHandler {
        return temp;
     }
 
+    public static <T> void printArray(T[] array){
+        System.out.println(Arrays.toString(array));
+    }
+
     public static int[] pushIntoArray(int[] arr, int element) {
 
         int[] newArray = new int[arr.length + 1];

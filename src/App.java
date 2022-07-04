@@ -3,6 +3,7 @@ import java.io.IOException;
 import src.utils.Password;
 import src.utils.ArrayHandler;
 import src.utils.CustomArray;
+import src.utils.CustomTag;
 import src.utils.FileHandler;
 
 public class App {
@@ -34,9 +35,11 @@ public class App {
         }
         fh.write(filenames[2], data);
 
-        System.out.println(data.getSize());
-        for (int i = 0; i < data.getSize(); i++) {
-            System.out.println(data.get(i));
+        CustomTag ct = new CustomTag();
+        CustomArray<Object[]> data2 = ct.toCustomTag(data);
+        System.out.println(data2.getSize());
+        for (int i = 0; i < data2.getSize(); i++) {
+            ArrayHandler.printArray(data2.get(i));
         }
 
     }
