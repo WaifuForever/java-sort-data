@@ -5,7 +5,7 @@ import java.io.IOException;
 import src.algorithms.Bubble;
 import src.algorithms.Counting;
 import src.algorithms.Insertion;
-import src.interfaces.Callable;
+import src.algorithms.Selection;
 import src.interfaces.Sorter;
 import src.utils.Password;
 import src.utils.ArrayHandler;
@@ -32,6 +32,7 @@ public class App {
            
             Integer[] tags = tagHandler.getTagsArray(data, 1);
             long startTime = System.nanoTime();
+            ArrayHandler.printArray(tags);
             sorter.sortArray(tags);
             long endTime = System.nanoTime();
 
@@ -68,7 +69,7 @@ public class App {
         }
         fh.write(filenames[3], data, 0);
 
-        Sorter[] sorters = new Sorter[] { new Bubble(), new Insertion(), new Counting() };
+        Sorter[] sorters = new Sorter[] { new Bubble(), new Insertion(), new Selection(), new Counting() };
 
 
         for (int i = 0; i < sorters.length; i++) {

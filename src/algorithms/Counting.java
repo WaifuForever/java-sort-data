@@ -1,6 +1,7 @@
 package src.algorithms;
 
 import src.interfaces.Sorter;
+import src.utils.ArrayHandler;
 
 public class Counting implements Sorter {
 
@@ -13,13 +14,12 @@ public class Counting implements Sorter {
         Integer[] arr2 = new Integer[k + 1];
         Integer[] output = new Integer[arr.length];
 
-        for (int i = 0; i < k; i++)
+        for (int i = 0; i <= k; i++)
             arr2[i] = 0;
-        // System.out.println(Arrays.toString(arr2));
+
         for (int i = 0; i < arr.length; i++) {
             arr2[arr[i]]++;
         }
-        // System.out.println(Arrays.toString(arr2));
 
         for (int i = 1; i <= k; i++)
             arr2[i] = arr2[i] + arr2[i - 1];

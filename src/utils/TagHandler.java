@@ -16,9 +16,11 @@ public class TagHandler {
 
         ArrayHandler.printArray(tags);
         System.out.printf("tags = %d, data = %d\n", tags.length, newCustomArray.getSize());
-        for (int i = 0; i < newCustomArray.getSize(); i++) {
-            System.out.println(newCustomArray.get(i));
-        }
+        /*
+         * for (int i = 0; i < newCustomArray.getSize(); i++) {
+         * System.out.println(newCustomArray.get(i));
+         * }
+         */
 
         return newCustomArray;
     }
@@ -28,7 +30,7 @@ public class TagHandler {
         Integer[] arr = new Integer[size];
 
         for (int i = 0; i < size; i++) {
-            //System.out.printf("i = %d, index = %d\n", i, index);
+            // System.out.printf("i = %d, index = %d\n", i, index);
 
             // System.out.println(data.get(i + index));
             arr[i] = Integer.parseInt(data.get(i + index).split(",")[0]);
