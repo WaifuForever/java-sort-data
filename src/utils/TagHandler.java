@@ -13,7 +13,7 @@ public class TagHandler {
         for (int i = 0; i < tags.length; i++) {
             newCustomArray.add(data.get(ArrayHandler.sequentialSearch(oldTags, tags[i]) + skip));
         }
-        
+
         ArrayHandler.printArray(tags);
         System.out.printf("tags = %d, data = %d\n", tags.length, newCustomArray.getSize());
         for (int i = 0; i < newCustomArray.getSize(); i++) {
@@ -28,6 +28,9 @@ public class TagHandler {
         Integer[] arr = new Integer[size];
 
         for (int i = 0; i < size; i++) {
+            //System.out.printf("i = %d, index = %d\n", i, index);
+
+            // System.out.println(data.get(i + index));
             arr[i] = Integer.parseInt(data.get(i + index).split(",")[0]);
         }
 

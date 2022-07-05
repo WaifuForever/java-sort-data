@@ -3,7 +3,10 @@ package src;
 import java.io.IOException;
 
 import src.algorithms.Bubble;
+import src.algorithms.Counting;
+import src.algorithms.Insertion;
 import src.interfaces.Callable;
+import src.interfaces.Sorter;
 import src.utils.Password;
 import src.utils.ArrayHandler;
 import src.utils.CallableUtils;
@@ -19,6 +22,26 @@ public class App {
     private static CallableUtils callableUtils = new CallableUtils();
 
     private static TagHandler tagHandler = new TagHandler();
+
+    private static void sortData(Sorter sorter, CustomArray<String> data) {
+        int size = 10;
+        long time[] = new long[size];
+
+        for (int i = 0; i < size; i++) {
+            data.shuffleArray(1);
+           
+            Integer[] tags = tagHandler.getTagsArray(data, 1);
+            long startTime = System.nanoTime();
+            sorter.sortArray(tags);
+            long endTime = System.nanoTime();
+
+            data = tagHandler.reorderArray(tags, data, 1);
+            time[i] = endTime - startTime;
+        }
+        ArrayHandler.printArray(time);
+        fh.write(sorter.getClass().getSimpleName() + ".csv", data, 0);
+
+    }
 
     public static void main(String[] args) throws IOException {
 
@@ -45,28 +68,12 @@ public class App {
         }
         fh.write(filenames[3], data, 0);
 
-        Integer[] tags = tagHandler.getTagsArray(data, 1);
-        ArrayHandler.shuffleArray(tags);
-      
-        data = tagHandler.reorderArray(tags, data, 1);
-        
-        new Bubble().sortArray(tags);
-        
-        
-        data = tagHandler.reorderArray(tags, data, 1);      
-        
+        Sorter[] sorters = new Sorter[] { new Bubble(), new Insertion(), new Counting() };
 
-       
-        
 
-        /*
-         * CustomTag ct = new CustomTag();
-         * CustomArray<Object[]> data2 = ct.toCustomTag(data);
-         * System.out.println(data2.getSize());
-         * for (int i = 0; i < data2.getSize(); i++) {
-         * ArrayHandler.printArray(data2.get(i));
-         * }
-         */
+        for (int i = 0; i < sorters.length; i++) {
+            sortData(sorters[i], data);
+        }
 
     }
 

@@ -43,7 +43,7 @@ public class ArrayHandler {
         return newArray;
     }
 
-    public static <T> T[] sliceArray(T[] array, int startIndex, int endIndex){
+    public static <T> T[] sliceArray(T[] array, int startIndex, int endIndex) {
         return Arrays.copyOfRange(array, startIndex, endIndex);
     }
 
@@ -51,6 +51,12 @@ public class ArrayHandler {
         String temp = Arrays.toString(array);
         return temp.substring(1, temp.length() - 1).replace(", ", ",");
 
+    }
+
+    public static <T> T[] concatWithArrayCopy(T[] array1, T[] array2) {
+        T[] result = Arrays.copyOf(array1, array1.length + array2.length);
+        System.arraycopy(array2, 0, result, array1.length, array2.length);
+        return result;
     }
 
     public static String concatArray(String[] array, String inBetween) {
@@ -71,10 +77,14 @@ public class ArrayHandler {
             temp[index] = arr[i];
             index++;
         }
-       return temp;
+        return temp;
     }
 
-    public static <T> void printArray(T[] array){
+    public static <T> void printArray(T[] array) {
+        System.out.println(Arrays.toString(array));
+    }
+
+    public static void printArray(long[] array) {
         System.out.println(Arrays.toString(array));
     }
 

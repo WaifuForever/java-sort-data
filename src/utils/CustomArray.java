@@ -23,6 +23,23 @@ public class CustomArray<T> {
 
     private T[] array;
 
+    public void shuffleArray(int skip) {
+        T[] tempArray = getArray(skip);
+        T[] trunkedArray = (T[]) new Object[skip];
+
+        ArrayHandler.shuffleArray(tempArray);
+        for (int i = 0; i < skip; i++) {
+            trunkedArray[i] = array[i];
+        }
+
+        array = ArrayHandler.concatWithArrayCopy(trunkedArray, tempArray);
+
+    }
+
+    private T[] getArray(int skip) {
+        return ArrayHandler.sliceArray(array, skip, size);
+    }
+
     public T[] getArray() {
         return ArrayHandler.sliceArray(array, 0, size);
     }
