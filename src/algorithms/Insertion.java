@@ -1,5 +1,7 @@
 package src.algorithms;
 
+import src.interfaces.Sorter;
+
 public class Insertion implements Sorter {
     private void insertionSort(Integer[] arr) {
         int j, key;

@@ -1,5 +1,7 @@
 package src.algorithms;
 
+import src.interfaces.Sorter;
+
 public class Bucket implements Sorter {
     private class CustomArray {
         private int size = 0;

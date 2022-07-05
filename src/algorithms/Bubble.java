@@ -1,5 +1,7 @@
 package src.algorithms;
 
+import src.interfaces.Sorter;
+
 public class Bubble implements Sorter{
     private void swap(Integer[] arr, int i, int j){
         arr[i] = (arr[i] + arr[j]) - (arr[j] = arr[i]);

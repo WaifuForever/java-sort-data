@@ -1,5 +1,7 @@
 package src.algorithms;
 
+import src.interfaces.Sorter;
+
 public class Radix implements Sorter {
     private int getMax(Integer[] arr) {
         int k = 0;

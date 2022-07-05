@@ -2,6 +2,8 @@ package src.algorithms;
 
 import java.util.Arrays;
 
+import src.interfaces.Sorter;
+
 public class Merge implements Sorter {
 
     private void mergeSort(Integer[] arr) {

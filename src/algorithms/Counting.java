@@ -1,5 +1,7 @@
 package src.algorithms;
 
+import src.interfaces.Sorter;
+
 public class Counting implements Sorter {
 
     private void countingSort(Integer[] arr) {
