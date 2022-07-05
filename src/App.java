@@ -62,8 +62,8 @@ public class App {
         sortFile(new Quick(1), data);
         sortFile(new Bubble(1), data);
         sortFile(new Insertion(1), data);
-      */
-
+      
+        */
         
         /*
 

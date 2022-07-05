@@ -14,7 +14,6 @@ public class Bucket implements Sorter {
 
         CustomArray() {
             arr = new int[0];
-
         }
 
         public void add(int n) {

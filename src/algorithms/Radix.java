@@ -56,7 +56,7 @@ public class Radix implements Sorter {
         }
 
         for (int i = startIndex; i < arr.getSize(); i++)
-            mfield.call(arr,i, output[i]);
+            mfield.call(arr, i, output[i]);
         //for (int i = 0; i < arr.length; i++)
         //    arr[i] = output[i];
     }
