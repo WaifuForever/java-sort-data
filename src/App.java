@@ -2,16 +2,11 @@ package src;
 
 import java.io.IOException;
 
-import src.algorithms.Bubble;
-import src.algorithms.Counting;
-import src.algorithms.Insertion;
-import src.algorithms.Selection;
-import src.interfaces.Sorter;
 import src.utils.Password;
+import src.utils.AlgorithmsHandler;
 import src.utils.ArrayHandler;
 import src.utils.CallableUtils;
 import src.utils.CustomArray;
-import src.utils.TagHandler;
 import src.utils.FileHandler;
 
 public class App {
@@ -20,29 +15,6 @@ public class App {
     private static FileHandler fh = new FileHandler();
 
     private static CallableUtils callableUtils = new CallableUtils();
-
-    private static TagHandler tagHandler = new TagHandler();
-
-    private static void sortData(Sorter sorter, CustomArray<String> data) {
-        int size = 10;
-        long time[] = new long[size];
-
-        for (int i = 0; i < size; i++) {
-            data.shuffleArray(1);
-           
-            Integer[] tags = tagHandler.getTagsArray(data, 1);
-            long startTime = System.nanoTime();
-            ArrayHandler.printArray(tags);
-            sorter.sortArray(tags);
-            long endTime = System.nanoTime();
-
-            data = tagHandler.reorderArray(tags, data, 1);
-            time[i] = endTime - startTime;
-        }
-        ArrayHandler.printArray(time);
-        fh.write(sorter.getClass().getSimpleName() + ".csv", data, 0);
-
-    }
 
     public static void main(String[] args) throws IOException {
 
@@ -69,16 +41,11 @@ public class App {
         }
         fh.write(filenames[3], data, 0);
 
-        Sorter[] sorters = new Sorter[] { new Bubble(), new Insertion(), new Selection(), new Counting() };
-
-
-        for (int i = 0; i < sorters.length; i++) {
-            sortData(sorters[i], data);
-        }
+        AlgorithmsHandler.sortData(data);
 
     }
 
-    public static String formateDate(String date) {// 2016-12-18 03:21:51
+    private static String formateDate(String date) {// 2016-12-18 03:21:51
         // System.out.println(date.split(" ", 2)[0]);
         String[] temp = date.split(" ", 2)[0].split("-");
         return ArrayHandler.concatArray(ArrayHandler.reverseArray(temp), "/");

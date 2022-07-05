@@ -14,8 +14,8 @@ public class TagHandler {
             newCustomArray.add(data.get(ArrayHandler.sequentialSearch(oldTags, tags[i]) + skip));
         }
 
-        ArrayHandler.printArray(tags);
-        System.out.printf("tags = %d, data = %d\n", tags.length, newCustomArray.getSize());
+        //ArrayHandler.printArray(tags);
+        //System.out.printf("tags = %d, data = %d\n", tags.length, newCustomArray.getSize());
         /*
          * for (int i = 0; i < newCustomArray.getSize(); i++) {
          * System.out.println(newCustomArray.get(i));
