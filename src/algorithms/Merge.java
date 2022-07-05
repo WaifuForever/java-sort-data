@@ -4,19 +4,19 @@ import java.util.Arrays;
 
 public class Merge implements Sorter {
 
-    private void mergeSort(int[] arr) {
+    private void mergeSort(Integer[] arr) {
         int length = arr.length;
 
         if (length < 2)
             return;
 
-        int[] left = Arrays.copyOfRange(arr, 0, length / 2), right = Arrays.copyOfRange(arr, (length / 2), length);
+        Integer[] left = Arrays.copyOfRange(arr, 0, length / 2), right = Arrays.copyOfRange(arr, (length / 2), length);
         mergeSort(left);
         mergeSort(right);
         merge(arr, left, right);
     }
 
-    private void merge(int[] arr, int[] left, int[] right) {
+    private void merge(Integer[] arr, Integer[] left, Integer[] right) {
         int i = 0, j = 0, k = 0;
 
         while (i < left.length && j < right.length) {
@@ -45,7 +45,7 @@ public class Merge implements Sorter {
         }
     }
 
-    public void sortArray(int[] arr) {
+    public void sortArray(Integer[] arr) {
         mergeSort(arr);
 
     }

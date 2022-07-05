@@ -2,14 +2,14 @@ package src.algorithms;
 
 public class Counting implements Sorter {
 
-    private void countingSort(int[] arr) {
+    private void countingSort(Integer[] arr) {
         int k = 0;
         for (int i = 0; i < arr.length - 1; i++) {
             if (k < arr[i])
                 k = arr[i];
         }
-        int[] arr2 = new int[k + 1];
-        int[] output = new int[arr.length];
+        Integer[] arr2 = new Integer[k + 1];
+        Integer[] output = new Integer[arr.length];
 
         for (int i = 0; i < k; i++)
             arr2[i] = 0;
@@ -36,7 +36,7 @@ public class Counting implements Sorter {
             arr[i] = output[i];
     }
 
-    public void sortArray(int[] arr) {
+    public void sortArray(Integer[] arr) {
         countingSort(arr);
 
     }

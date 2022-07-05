@@ -3,15 +3,15 @@ package src.algorithms;
 public class Bucket implements Sorter {
     private class CustomArray {
         private int size = 0;
-        private int[] arr;
+        private Integer[] arr;
 
         CustomArray(int size) {
-            arr = new int[size];
+            arr = new Integer[size];
             this.size = size - 1;
         }
 
         CustomArray() {
-            arr = new int[0];
+            arr = new Integer[0];
 
         }
 
@@ -35,12 +35,12 @@ public class Bucket implements Sorter {
             return arr.length == size;
         }
 
-        public int[] array() {
+        public Integer[] array() {
             return arr;
         }
 
         private void doubleSize() {
-            int[] newArr = new int[arr.length + 1];
+            Integer[] newArr = new Integer[arr.length + 1];
             for (int i = 0; i < arr.length; i++) {
                 newArr[i] = arr[i];
             }
@@ -49,7 +49,7 @@ public class Bucket implements Sorter {
 
     }
 
-    private int getMax(int[] arr) {
+    private int getMax(Integer[] arr) {
         int k = 0;
         for (int i = 0; i < arr.length - 1; i++) {
             if (k < arr[i])
@@ -58,7 +58,7 @@ public class Bucket implements Sorter {
         return k;
     }
 
-    public void bucketSort(int[] arr) {
+    public void bucketSort(Integer[] arr) {
         int k = String.valueOf(getMax(arr)).length();
         int chunkSize = 10;
 
@@ -117,7 +117,7 @@ public class Bucket implements Sorter {
 
     }
 
-    public void sortArray(int[] arr) {
+    public void sortArray(Integer[] arr) {
         bucketSort(arr);
 
     }

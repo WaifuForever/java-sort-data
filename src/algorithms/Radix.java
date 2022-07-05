@@ -1,7 +1,7 @@
 package src.algorithms;
 
 public class Radix implements Sorter {
-    private int getMax(int[] arr) {
+    private int getMax(Integer[] arr) {
         int k = 0;
         for (int i = 0; i < arr.length - 1; i++) {
             if (k < arr[i])
@@ -10,7 +10,7 @@ public class Radix implements Sorter {
         return k;
     }
 
-    private void countingSort(int[] arr, int place) {
+    private void countingSort(Integer[] arr, int place) {
         int k = 0, temp = 0;
 
         for (int i = 0; i < arr.length; i++) {
@@ -19,9 +19,9 @@ public class Radix implements Sorter {
                 k = temp;
 
         }
-        int[] arr2 = new int[k + 1];
+        Integer[] arr2 = new Integer[k + 1];
 
-        int[] output = new int[arr.length];
+        Integer[] output = new Integer[arr.length];
 
         for (int i = 0; i < k; i++)
             arr2[i] = 0;
@@ -49,7 +49,7 @@ public class Radix implements Sorter {
             arr[i] = output[i];
     }
 
-    public void sortArray(int[] arr) {
+    public void sortArray(Integer[] arr) {
         int k = String.valueOf(getMax(arr)).length();
 
         for (int i = 0; i < k; i++)

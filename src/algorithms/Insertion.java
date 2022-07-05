@@ -1,7 +1,7 @@
 package src.algorithms;
 
 public class Insertion implements Sorter {
-    private void insertionSort(int[] arr) {
+    private void insertionSort(Integer[] arr) {
         int j, key;
         for (int i = 1; i < arr.length; i++) {
             key = arr[i];
@@ -16,7 +16,7 @@ public class Insertion implements Sorter {
 
     }
 
-    public void sortArray(int[] arr) {
+    public void sortArray(Integer[] arr) {
         insertionSort(arr);
 
     }

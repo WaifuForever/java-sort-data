@@ -1,11 +1,11 @@
 package src.algorithms;
 
 public class Selection implements Sorter {
-    private void swap(int[] arr, int i, int j) {
+    private void swap(Integer[] arr, int i, int j) {
         arr[i] = (arr[i] + arr[j]) - (arr[j] = arr[i]);
     }
 
-    private void selectionSort(int[] arr) {
+    private void selectionSort(Integer[] arr) {
         for (int i = 0; i < arr.length - 1; i++) {
             int smallest = i;
             for (int j = i + 1; j < arr.length; j++) {
@@ -23,7 +23,7 @@ public class Selection implements Sorter {
 
     }
 
-    public void sortArray(int[] arr) {
+    public void sortArray(Integer[] arr) {
         selectionSort(arr);
 
     }

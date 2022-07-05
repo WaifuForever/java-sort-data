@@ -1,11 +1,11 @@
 package src.algorithms;
 
 public class Quick implements Sorter {
-    private void swap(int[] arr, int i, int j) {
+    private void swap(Integer[] arr, int i, int j) {
         arr[i] = (arr[i] + arr[j]) - (arr[j] = arr[i]);
     }
 
-    private int partition(int[] arr, int left, int right) {
+    private int partition(Integer[] arr, int left, int right) {
         int p = arr[left];
         int i = left + 1;
         int j = right;
@@ -22,7 +22,7 @@ public class Quick implements Sorter {
         return j;
     }
 
-    private void quickSort(int[] arr, int left, int right) {
+    private void quickSort(Integer[] arr, int left, int right) {
         if (left < right) {
             int pivot = partition(arr, left, right);
             quickSort(arr, left, pivot - 1);
@@ -30,7 +30,7 @@ public class Quick implements Sorter {
         }
     }
 
-    public void sortArray(int[] arr) {
+    public void sortArray(Integer[] arr) {
         quickSort(arr, 0, arr.length - 1);
 
     }

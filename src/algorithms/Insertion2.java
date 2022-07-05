@@ -1,11 +1,11 @@
 package src.algorithms;
 
 public class Insertion2 implements Sorter {
-    private void swap(int[] arr, int i, int j) {
+    private void swap(Integer[] arr, int i, int j) {
         arr[i] = (arr[i] + arr[j]) - (arr[j] = arr[i]);
     }
 
-    private void insertionSort(int[] arr) {
+    private void insertionSort(Integer[] arr) {
         int j;
         for (int k = 1; k < arr.length; k++) {
             j = k - 1;
@@ -17,7 +17,7 @@ public class Insertion2 implements Sorter {
         }
     }
 
-    public void sortArray(int[] arr) {
+    public void sortArray(Integer[] arr) {
         insertionSort(arr);
 
     }
