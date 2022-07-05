@@ -12,14 +12,20 @@ public class CustomArray<T> {
     }
 
     public CustomArray(int length) {
+
         array = (T[]) new Object[length > 0 ? length : 50];
+
     }
 
     public CustomArray() {
         array = (T[]) new Object[50];
     }
 
-    T[] array;
+    private T[] array;
+
+    public T[] getArray() {
+        return ArrayHandler.sliceArray(array, 0, size);
+    }
 
     public void add(T element) {
         if (size == array.length)

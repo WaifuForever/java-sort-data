@@ -16,7 +16,15 @@ public class ArrayHandler {
         }
     }
 
-    public static boolean isSorted(int[] array, int n) {
+    public static int sequentialSearch(Integer[] list, int target) {
+        for (int i = 0; i < list.length; i++) {
+            if (list[i] == target)
+                return i;
+        }
+        return -1;
+    }
+
+    public static boolean isSorted(Integer[] array, int n) {
         if (n == 1 || n == 0)
             return true;
         return array[n - 2] <= array[n - 1] && isSorted(array, n - 1);
@@ -33,6 +41,10 @@ public class ArrayHandler {
         newArray[newArray.length - 1] = element;
         // System.out.println(Arrays.toString(newArray));
         return newArray;
+    }
+
+    public static <T> T[] sliceArray(T[] array, int startIndex, int endIndex){
+        return Arrays.copyOfRange(array, startIndex, endIndex);
     }
 
     public static String concatArray(String[] array) {

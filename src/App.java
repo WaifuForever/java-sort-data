@@ -2,12 +2,13 @@ package src;
 
 import java.io.IOException;
 
+import src.algorithms.Bubble;
 import src.interfaces.Callable;
 import src.utils.Password;
 import src.utils.ArrayHandler;
 import src.utils.CallableUtils;
 import src.utils.CustomArray;
-import src.utils.CustomTag;
+import src.utils.TagHandler;
 import src.utils.FileHandler;
 
 public class App {
@@ -17,12 +18,14 @@ public class App {
 
     private static CallableUtils callableUtils = new CallableUtils();
 
+    private static TagHandler tagHandler = new TagHandler();
+
     public static void main(String[] args) throws IOException {
 
         String[] filenames = { "passwords.csv", "passwords_classifier.csv", "filtered_passwords_classifier.csv",
                 "passwords_formated_data.csv" };
 
-        CustomArray<String> data = fh.read(filenames[0], 200);
+        CustomArray<String> data = fh.read(filenames[0], 50);
 
         data.update(0, data.get(0) + ",classification");
         // generates passwords_classifier
@@ -41,6 +44,21 @@ public class App {
 
         }
         fh.write(filenames[3], data, 0);
+
+        Integer[] tags = tagHandler.getTagsArray(data, 1);
+        ArrayHandler.shuffleArray(tags);
+      
+        data = tagHandler.reorderArray(tags, data, 1);
+        
+        new Bubble().sortArray(tags);
+        
+        
+        data = tagHandler.reorderArray(tags, data, 1);      
+        
+
+       
+        
+
         /*
          * CustomTag ct = new CustomTag();
          * CustomArray<Object[]> data2 = ct.toCustomTag(data);
