@@ -1,6 +1,7 @@
 package src.algorithms;
 
 import src.interfaces.Sorter;
+import src.utils.ArrayHandler;
 
 public class Selection implements Sorter {
     private void swap(Integer[] arr, int i, int j) {
@@ -28,5 +29,19 @@ public class Selection implements Sorter {
     public void sortArray(Integer[] arr) {
         selectionSort(arr);
 
+    }
+
+    @Override
+    public void bestCase(Integer[] arr) {
+        // array already sorted
+        sortArray(arr);
+        
+    }
+
+    @Override
+    public void worstCase(Integer[] arr) {
+        // reversed array
+        sortArray(arr);
+        ArrayHandler.reverseArrayInPlace(arr);
     }
 }

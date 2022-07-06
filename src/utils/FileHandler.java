@@ -119,7 +119,7 @@ public class FileHandler {
         if (date.matches("^[0-9]{8}$")) {
             temp = new String[] { date.substring(0, 4), date.substring(4, 6), date.substring(6) };
         } else {
-            temp = date.split(" ", 2)[0].split("-");
+            temp = date.split(" ", 2)[0].split("-", 3);
         }
         return ArrayHandler.concatArray(ArrayHandler.reverseArray(temp), "/");
 

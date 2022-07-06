@@ -24,6 +24,7 @@ public class AlgorithmsHandler {
         int size = 10;
         long time[] = new long[size];
 
+        // 3 sort date
         for (int j = 1; j < data.getSize(); j++) {
             String[] line = ((String) data.get(j)).split(",", 5);
             line[3] = dateToInt(line[3]);
@@ -38,7 +39,7 @@ public class AlgorithmsHandler {
             long startTime = System.nanoTime();
             sorter.sortArray(dateIndexes);
             long endTime = System.nanoTime();
-            
+
             Integer[] indexesArray = ArrayHandler.generateIndexArray(dateIndexes, tagsDate);
 
             data = tagHandler.reorderArray(indexesArray, data, 1);
@@ -49,22 +50,22 @@ public class AlgorithmsHandler {
 
     }
 
-    public static String dateToInt(String line) {
+    private static String dateToInt(String line) {
         String[] date = line.split(" ", 2)[0].split("-", 3);
         // System.out.println(ArrayHandler.concatArray(date));
         return date[0].concat(date[1]).concat(date[2]);
     }
 
-    private static long[] averageTime(long[] array, int minor_steps) {
+    private static long[] averageTime(long[] array, int minorSteps) {
         long[] media = { 0, 0 };
         for (int i = 0; i < array.length; i++) {
-            if (i < minor_steps) {
+            if (i < minorSteps) {
                 media[0] += array[i];
             }
             media[1] += array[i];
         }
-        if (minor_steps < array.length) {
-            media[0] = media[0] / minor_steps;
+        if (minorSteps < array.length) {
+            media[0] = media[0] / minorSteps;
         } else {
             media[0] = media[0] / array.length;
         }

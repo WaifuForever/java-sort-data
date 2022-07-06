@@ -16,14 +16,6 @@ public class ArrayHandler {
         }
     }
 
-    public static <T> void worstCase(T[] array) {
-        reverseArray(array);
-    };
-
-    public static <T> void bestCase(T[] array) {
-
-    };
-
     public static <T> T[] copyArray(T[] array) {
         return Arrays.copyOf(array, array.length);
     }
@@ -105,6 +97,19 @@ public class ArrayHandler {
         temp += array[array.length - 1];
         return temp;
 
+    }
+
+    public static <T> void reverseArrayInPlace(T[] arr) {
+        int index = 0;
+        for (int i = arr.length - 1; i >= 0; i--) {
+            T ax = arr[index];
+            if(index<i){
+                arr[index] = arr[i];
+                arr[i] = ax;
+            }
+            index++;
+        }
+       //return temp;
     }
 
     public static <T> T[] reverseArray(T[] arr) {

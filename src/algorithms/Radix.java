@@ -59,4 +59,16 @@ public class Radix implements Sorter {
             countingSort(arr, i);
 
     }
+
+    @Override
+    public void bestCase(Integer[] arr) {
+        // CONSTANT
+        
+    }
+
+    @Override
+    public void worstCase(Integer[] arr) {
+        // CONSTANT
+        
+    }
 }
