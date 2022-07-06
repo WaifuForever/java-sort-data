@@ -1,13 +1,12 @@
 package src.algorithms;
 
 import src.interfaces.Sorter;
-import src.utils.ArrayHandler;
 
 public class Counting implements Sorter {
 
     private void countingSort(Integer[] arr) {
         int k = 0;
-        for (int i = 0; i < arr.length - 1; i++) {
+        for (int i = 0; i < arr.length; i++) {
             if (k < arr[i])
                 k = arr[i];
         }
@@ -23,8 +22,6 @@ public class Counting implements Sorter {
 
         for (int i = 1; i <= k; i++)
             arr2[i] = arr2[i] + arr2[i - 1];
-
-        // System.out.println(Arrays.toString(arr2));
 
         for (int i = arr.length - 1; i >= 0; i--) {
             // System.out.printf("arr[%d] = %d | arr2[%d] = %d | output[%d] = %d\n", i,
