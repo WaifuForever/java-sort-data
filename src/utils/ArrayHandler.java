@@ -15,7 +15,12 @@ public class ArrayHandler {
 
         }
     }
+    public static <T> void worstCase(T[] array){
+        reverseArray(array);
+    };
+    public static <T> void bestCase (T[] array){
 
+    };
     public static int sequentialSearch(Integer[] list, int target) {
         for (int i = 0; i < list.length; i++) {
             if (list[i] == target)
@@ -57,6 +62,15 @@ public class ArrayHandler {
         T[] result = Arrays.copyOf(array1, array1.length + array2.length);
         System.arraycopy(array2, 0, result, array1.length, array2.length);
         return result;
+    }
+    public static <T> void swap(CustomBiArray<T> arr, int i, int j) {
+        System.out.println("----------------");
+        //ArrayHandler.printArray(arr.get(i).clone());
+        //ArrayHandler.printArray(arr.get(j).clone());
+        T[] temp = arr.get(i);
+        arr.update(i, arr.get(j).clone());
+        arr.update(j, temp.clone());
+        //ArrayHandler.printArray(arr.get(i).clone());
     }
 
     public static String concatArray(String[] array, String inBetween) {
