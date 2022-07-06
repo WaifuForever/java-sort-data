@@ -20,25 +20,38 @@ public class AlgorithmsHandler {
     private static Sorter[] sorters = new Sorter[] { new Counting() };
 
     private static void routine(Sorter sorter, CustomArray<String> data) {
-        int size = 1000;
+        int size = 10;
         long time[] = new long[size];
-
+    
+        for (int j = 1; j < data.getSize(); j++) {
+            String[] line = ((String) data.get(j)).split(",", 5);
+            line[3] = dateToInt(line[3]);
+            data.update(j, ArrayHandler.concatArray(line));
+        }
         for (int i = 0; i < size; i++) {
             data.shuffleArray(1);
-
+            System.out.println(i);
             Integer[] tags = tagHandler.getNumberTagsFromArray(data, 1, 0);
+            Integer[] tagsDate = tagHandler.getNumberTagsFromArray(data, 1, 3);
 
             long startTime = System.nanoTime();
-            sorter.sortArray(tags);
+            ArrayHandler.printArray(tagsDate);
+            sorter.sortArray(tagsDate);
+            ArrayHandler.printArray(tagsDate);
+            System.out.println(i);
             long endTime = System.nanoTime();
 
-            data = tagHandler.reorderArray(tags, data, 1, 0, false);
+            data = tagHandler.reorderArray(tags, data, 1);
             time[i] = endTime - startTime;
         }
         //System.out.println(averageTime(time, 3));
         ArrayHandler.printArray(averageTime(time, 3));
         fh.write(/*"password_length" + "wostcase"*/ sorter.getClass().getSimpleName() + ".csv", data, 0);
 
+    }
+    public static String dateToInt(String line){
+        String[] date = line.split("/", 3);        
+        return date[2].concat(date[1]).concat(date[0]);
     }
 
     private static long[] averageTime(long[] array, int minor_steps) {

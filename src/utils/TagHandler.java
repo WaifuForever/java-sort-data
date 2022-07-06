@@ -2,21 +2,27 @@ package src.utils;
 
 public class TagHandler {
 
-    public CustomArray<String> reorderArray(Integer tags[], CustomArray<String> data, int skip, int index, boolean isString) {
+    public CustomArray<String> reorderArray(Integer tags[], CustomArray<String> data, int skip) {
         CustomArray<String> newCustomArray = new CustomArray<String>(data.getSize());
-        if(isString){
-            String[] oldTags = getStringTagsFromArray(data, skip, index);
-            return newCustomArray;
-        }else{
-            Integer[] oldTags = getNumberTagsFromArray(data, skip, index);
-            for (int i = 0; i < skip; i++) {
-                newCustomArray.add(data.get(i));
-            }
-            for (int i = 0; i < tags.length; i++) {
-                newCustomArray.add(data.get(ArrayHandler.sequentialSearch(oldTags, tags[i]) + skip));
-            }
-            return newCustomArray;
+
+        Integer[] oldTags = getTagsArray(data, skip);
+
+        for (int i = 0; i < skip; i++) {
+            newCustomArray.add(data.get(i));
         }
+        for (int i = 0; i < tags.length; i++) {
+            newCustomArray.add(data.get(ArrayHandler.sequentialSearch(oldTags, tags[i]) + skip));
+        }
+
+        //ArrayHandler.printArray(tags);
+        //System.out.printf("tags = %d, data = %d\n", tags.length, newCustomArray.getSize());
+        /*
+         * for (int i = 0; i < newCustomArray.getSize(); i++) {
+         * System.out.println(newCustomArray.get(i));
+         * }
+         */
+
+        return newCustomArray;
     }
 
 
@@ -26,15 +32,17 @@ public class TagHandler {
         Integer[] arr = new Integer[size];
 
         for (int i = 0; i < size; i++) {
-            String[] date = data.get(i + skip).split(",")[index].split("/", 3);
+            System.out.printf("%d %d\n",size, i);
+            //System.out.println(data.get(i));
+            String[] date = data.get(i+skip).split(",")[index].split("/", 3);
+            //System.out.println(date);
+            System.out.println(Integer.parseInt(date[2].concat(date[1]).concat(date[0])));
             arr[i] = Integer.parseInt(date[2].concat(date[1]).concat(date[0]));
-        }
 
+        }
         return arr;
     }
-
     public Integer[] getNumberTagsFromArray(CustomArray<String> data, int skip, int index) {
-        if(index<0 || index>5) index=0;
         int size = data.getSize() - skip;
         Integer[] arr = new Integer[size];
 
@@ -43,6 +51,19 @@ public class TagHandler {
 
             // System.out.println(data.get(i + skip));
             arr[i] = Integer.parseInt(data.get(i + skip).split(",")[index]);
+        }
+
+        return arr;
+    }
+    public Integer[] getTagsArray(CustomArray<String> data, int index) {
+        int size = data.getSize() - index;
+        Integer[] arr = new Integer[size];
+
+        for (int i = 0; i < size; i++) {
+            // System.out.printf("i = %d, index = %d\n", i, index);
+
+            // System.out.println(data.get(i + index));
+            arr[i] = Integer.parseInt(data.get(i + index).split(",")[0]);
         }
 
         return arr;
