@@ -63,14 +63,10 @@ public class ArrayHandler {
         System.arraycopy(array2, 0, result, array1.length, array2.length);
         return result;
     }
-    public static <T> void swap(CustomBiArray<T> arr, int i, int j) {
-        System.out.println("----------------");
-        //ArrayHandler.printArray(arr.get(i).clone());
-        //ArrayHandler.printArray(arr.get(j).clone());
-        T[] temp = arr.get(i);
-        arr.update(i, arr.get(j).clone());
-        arr.update(j, temp.clone());
-        //ArrayHandler.printArray(arr.get(i).clone());
+    public static <T> void swap(T[] arr, int i, int j) {
+        T temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
     }
 
     public static String concatArray(String[] array, String inBetween) {
