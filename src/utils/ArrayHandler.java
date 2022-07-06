@@ -15,12 +15,38 @@ public class ArrayHandler {
 
         }
     }
-    public static <T> void worstCase(T[] array){
+
+    public static <T> void worstCase(T[] array) {
         reverseArray(array);
     };
-    public static <T> void bestCase (T[] array){
+
+    public static <T> void bestCase(T[] array) {
 
     };
+
+    public static <T> T[] copyArray(T[] array) {
+        return Arrays.copyOf(array, array.length);
+    }
+
+    /*
+     * generate an index array refering the relation of the original array with the
+     * doppelganger array original -> doppelganger
+     */
+    public static Integer[] generateIndexArray(Integer[] original, Integer[] doppelganger) {
+        Integer[] indexArray = new Integer[original.length];
+
+        if (original.length != doppelganger.length)
+            return indexArray;
+
+        for (int i = 0; i < indexArray.length; i++) {
+            indexArray[i] = sequentialSearch(doppelganger, original[i]);
+            doppelganger[indexArray[i]] = -1;
+
+        }
+
+        return indexArray;
+    }
+
     public static int sequentialSearch(Integer[] list, int target) {
         for (int i = 0; i < list.length; i++) {
             if (list[i] == target)
@@ -63,6 +89,7 @@ public class ArrayHandler {
         System.arraycopy(array2, 0, result, array1.length, array2.length);
         return result;
     }
+
     public static <T> void swap(T[] arr, int i, int j) {
         T temp = arr[i];
         arr[i] = arr[j];
