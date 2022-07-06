@@ -34,24 +34,25 @@ public class AlgorithmsHandler {
 
             Integer[] tagsDate = tagHandler.getNumberTagsFromArray(data, 1, 3);
             Integer[] dateIndexes = ArrayHandler.copyArray(tagsDate);
-            Integer[] indexesArray = ArrayHandler.generateIndexArray(dateIndexes, tagsDate);
 
             long startTime = System.nanoTime();
             sorter.sortArray(dateIndexes);
-            long endTime = System.nanoTime();        
+            long endTime = System.nanoTime();
+            
+            Integer[] indexesArray = ArrayHandler.generateIndexArray(dateIndexes, tagsDate);
 
             data = tagHandler.reorderArray(indexesArray, data, 1);
             time[i] = endTime - startTime;
         }
-        // System.out.println(averageTime(time, 3));
         ArrayHandler.printArray(averageTime(time, 3));
-        fh.write(/* "password_length" + "wostcase" */ sorter.getClass().getSimpleName() + ".csv", data, 0);
+        fh.write(/* "password_length" + "wostcase" */ sorter.getClass().getSimpleName() + ".csv", data, 0, true);
 
     }
 
     public static String dateToInt(String line) {
-        String[] date = line.split("/", 3);
-        return date[2].concat(date[1]).concat(date[0]);
+        String[] date = line.split(" ", 2)[0].split("-", 3);
+        // System.out.println(ArrayHandler.concatArray(date));
+        return date[0].concat(date[1]).concat(date[2]);
     }
 
     private static long[] averageTime(long[] array, int minor_steps) {

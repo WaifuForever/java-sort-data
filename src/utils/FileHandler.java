@@ -92,16 +92,36 @@ public class FileHandler {
 
     }
 
-    public void write(String filename, CustomArray<String> data, int index) {
+    public void write(String filename, CustomArray<String> data, int index, boolean formatDate) {
         try (PrintWriter newFile = new PrintWriter("output/" + filename, "UTF-8")) {
 
-            for (int i = index; i < data.getSize(); i++) {
-                newFile.println(data.get(i));
+            if (formatDate) {
+                for (int i = index; i < data.getSize(); i++) {
+                    String[] line = ((String) data.get(i)).split(",", 5);
+                    line[3] = formateDate(line[3]);
+                    newFile.println(ArrayHandler.concatArray(line));
+                }
+            } else {
+                for (int i = index; i < data.getSize(); i++) {
+                    newFile.println(data.get(i));
+                }
             }
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+
+    }
+
+    private static String formateDate(String date) {// 2016-12-18 03:21:51
+        // System.out.println(date.split(" ", 2)[0]);
+        String[] temp;
+        if (date.matches("^[0-9]{8}$")) {
+            temp = new String[] { date.substring(0, 4), date.substring(4, 6), date.substring(6) };
+        } else {
+            temp = date.split(" ", 2)[0].split("-");
+        }
+        return ArrayHandler.concatArray(ArrayHandler.reverseArray(temp), "/");
 
     }
 
