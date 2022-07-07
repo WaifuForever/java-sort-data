@@ -18,89 +18,44 @@ public class AlgorithmsHandler {
             new Selection(),
             new Merge(), new Quick(), new Radix(), new Selection() };
 
-    private static Sorter[] sorters = new Sorter[] { new Counting() };
+    private static Sorter[] sorters = new Sorter[] { new Quick() };
 
     private static void routine(Sorter sorter, CustomArray<String> data) {
-        int size = 10;
+        int size = 1000;
         long time[] = new long[size];
         // String prefix, string case, int index
         // 3 sort date
+        Integer[] dates = new Integer[data.getSize()-1];
         for (int j = 1; j < data.getSize(); j++) {
             String[] line = ((String) data.get(j)).split(",", 5);
-            line[3] = dateToInt(line[3]);
-            data.update(j, ArrayHandler.concatArray(line));
+            dates[j-1] = dateToInt(line[3]);
+            System.out.println(dates[j-1]);
         }
+        Integer[] indexesArray = null;
         for (int i = 0; i < size; i++) {
             data.shuffleArray(1);
 
-            Integer[] tagsDate = tagHandler.getNumberTagsFromArray(data, 1, 3);
-            Integer[] dateIndexes = ArrayHandler.copyArray(tagsDate);
+            Integer[] dateIndexes = ArrayHandler.copyArray(dates);
 
-            long startTime = System.nanoTime();
-            sorter.sortArray(dateIndexes);
-            long endTime = System.nanoTime();
-
-            Integer[] indexesArray = ArrayHandler.generateIndexArray(dateIndexes, tagsDate);
-
-            data = tagHandler.reorderArray(indexesArray, data, 1);
-            time[i] = endTime - startTime;
-        }
-        ArrayHandler.printArray(averageTime(time, 3));
-        fh.write("passwords_data_".concat(sorter.getClass().getSimpleName()).concat("Sort_medioCaso_").concat(".csv"), data, 0, true);
-        time = new long[size];
-        for (int j = 1; j < data.getSize(); j++) {
-            String[] line = ((String) data.get(j)).split(",", 5);
-            line[3] = dateToInt(line[3]);
-            data.update(j, ArrayHandler.concatArray(line));
-        }
-        for (int i = 0; i < size; i++) {
-            data.shuffleArray(1);
-
-            Integer[] tagsDate = tagHandler.getNumberTagsFromArray(data, 1, 3);
-            Integer[] dateIndexes = ArrayHandler.copyArray(tagsDate);
-
-            long startTime = System.nanoTime();
             sorter.worstCase(dateIndexes);
-            sorter.sortArray(dateIndexes);
-            long endTime = System.nanoTime();
-
-            Integer[] indexesArray = ArrayHandler.generateIndexArray(dateIndexes, tagsDate);
-
-            data = tagHandler.reorderArray(indexesArray, data, 1);
-            time[i] = endTime - startTime;
-        }
-        ArrayHandler.printArray(averageTime(time, 3));
-        fh.write("passwords_data_".concat(sorter.getClass().getSimpleName()).concat("Sort_piorCaso_").concat(".csv"), data, 0, true);
-        for (int j = 1; j < data.getSize(); j++) {
-            String[] line = ((String) data.get(j)).split(",", 5);
-            line[3] = dateToInt(line[3]);
-            data.update(j, ArrayHandler.concatArray(line));
-        }
-        time = new long[size];
-        for (int i = 0; i < size; i++) {
-            data.shuffleArray(1);
-
-            Integer[] tagsDate = tagHandler.getNumberTagsFromArray(data, 1, 3);
-            Integer[] dateIndexes = ArrayHandler.copyArray(tagsDate);
-
             long startTime = System.nanoTime();
-            sorter.bestCase(dateIndexes);
             sorter.sortArray(dateIndexes);
             long endTime = System.nanoTime();
 
-            Integer[] indexesArray = ArrayHandler.generateIndexArray(dateIndexes, tagsDate);
+            indexesArray = ArrayHandler.generateIndexArray(dateIndexes, data);
 
-            data = tagHandler.reorderArray(indexesArray, data, 1);
+            //data = 
             time[i] = endTime - startTime;
         }
+        ArrayHandler.printArray(indexesArray);
         ArrayHandler.printArray(averageTime(time, 3));
-        fh.write("passwords_data_".concat(sorter.getClass().getSimpleName()).concat("Sort_melhorCaso_").concat(".csv"), data, 0, true);
+        fh.write("passwords_data_".concat(sorter.getClass().getSimpleName()).concat("Sort_piorCaso_").concat(".csv"), tagHandler.reorderArray(indexesArray, data, 1), 0, true);
     }
 
-    private static String dateToInt(String line) {
+    private static Integer dateToInt(String line) {
         String[] date = line.split(" ", 2)[0].split("-", 3);
         // System.out.println(ArrayHandler.concatArray(date));
-        return date[0].concat(date[1]).concat(date[2]);
+        return Integer.parseInt(date[0].concat(date[1]).concat(date[2]));
     }
 
     private static long[] averageTime(long[] array, int minorSteps) {

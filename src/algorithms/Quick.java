@@ -42,7 +42,7 @@ public class Quick implements Sorter {
     public void bestCase(Integer[] arr) {
         // Best Case is when the pivot element divides the list into two equal halves by
         // coming exactly in the middle position.
-        ArrayHandler.shuffleArray(arr);
+        partition(arr, 0, arr.length-1);
 
     }
 
