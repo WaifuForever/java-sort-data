@@ -20,36 +20,70 @@ public class AlgorithmsHandler {
 
     private static Sorter[] sorters = new Sorter[] { new Quick() };
 
-    private static void routine(Sorter sorter, CustomArray<String> data) {
-        int size = 1000;
-        long time[] = new long[size];
-        // String prefix, string case, int index
-        // 3 sort date
-        Integer[] dates = new Integer[data.getSize()-1];
-        for (int j = 1; j < data.getSize(); j++) {
-            String[] line = ((String) data.get(j)).split(",", 5);
-            dates[j-1] = dateToInt(line[3]);
-            System.out.println(dates[j-1]);
-        }
-        Integer[] indexesArray = null;
-        for (int i = 0; i < size; i++) {
-            data.shuffleArray(1);
+    private static void routine(String title, Sorter sorter, int permutation, CustomArray<String> mainArray,
+            Integer[] data,
+            int circleSize) {
 
-            Integer[] dateIndexes = ArrayHandler.copyArray(dates);
+        Integer[] shuffledData = null;
+        long time[] = new long[circleSize];
+        String[] cases = new String[] { "piorCaso", "medioCaso", "melhorCaso" };
 
-            sorter.worstCase(dateIndexes);
+        ArrayHandler.shuffleArray(data);
+        Integer[] originalData = ArrayHandler.copyArray(data);
+
+        
+        System.out.println(title +" -- " + cases[permutation]);
+ 
+        
+        for (int i = 0; i < circleSize; i++) {
+            ArrayHandler.shuffleArray(data);
+
+            switch (permutation) {
+                case 0:
+                    sorter.worstCase(data);
+                    break;
+                case 2:
+                    sorter.bestCase(data);
+                    break;
+                default:
+                    permutation = 1;
+                    break;
+            }
+
+            shuffledData = ArrayHandler.copyArray(data);
+
             long startTime = System.nanoTime();
-            sorter.sortArray(dateIndexes);
+            sorter.sortArray(data);
             long endTime = System.nanoTime();
+            /*
+             * System.out.println();
+             * System.out.println();
+             * 
+             * ArrayHandler.printArray(shuffledData);
+             */
 
-            indexesArray = ArrayHandler.generateIndexArray(dateIndexes, data);
-
-            //data = 
             time[i] = endTime - startTime;
         }
-        ArrayHandler.printArray(indexesArray);
+        
+         
         ArrayHandler.printArray(averageTime(time, 3));
-        fh.write("passwords_data_".concat(sorter.getClass().getSimpleName()).concat("Sort_piorCaso_").concat(".csv"), tagHandler.reorderArray(indexesArray, data, 1), 0, true);
+        ArrayHandler.printArray(shuffledData);
+        ArrayHandler.printArray(originalData);
+        
+       
+
+        originalData = ArrayHandler.generateIndexArray(shuffledData, originalData);
+        shuffledData = ArrayHandler.generateIndexArray(shuffledData, ArrayHandler.copyArray(data));
+
+        ArrayHandler.printArray(originalData);
+        System.out.println();
+        System.out.println();
+
+        mainArray = tagHandler.reorderArray(originalData, mainArray, 1);
+        mainArray = tagHandler.reorderArray(shuffledData, mainArray, 1);
+        title = "passwords_" + title + "_" + sorter.getClass().getSimpleName() + "Sort_" + cases[permutation] + "_.csv";
+
+        fh.write(title, mainArray, 0, true);
     }
 
     private static Integer dateToInt(String line) {
@@ -75,9 +109,34 @@ public class AlgorithmsHandler {
         return media;
     }
 
-    public static void sortData(CustomArray<String> data) {
-        for (int i = 0; i < sorters.length; i++) {
-            routine(sorters[i], data);
+    public static void sortData(CustomArray<String> mainArray) {
+        int size = 1000;
+        Integer[] dates = new Integer[mainArray.getSize() - 1],
+                months = new Integer[mainArray.getSize() - 1], lenghts = new Integer[mainArray.getSize() - 1];
+
+        // String prefix, string case, int index
+        // 3 sort date
+        for (int j = 1; j < mainArray.getSize(); j++) {
+            String[] line = ((String) mainArray.get(j)).split(",", 5);
+            dates[j - 1] = dateToInt(line[3]);
+
         }
+
+        for (int j = 1; j < mainArray.getSize(); j++) {
+            String[] line = ((String) mainArray.get(j)).split(",", 5);
+            months[j - 1] = Integer.parseInt(line[3].substring(5, 7));
+
+        }
+
+        lenghts = tagHandler.getNumberTagsFromArray(mainArray, 1, 2);
+
+        for (int i = 0; i < sorters.length; i++) {
+            for (int j = 0; j < 3; j++) {
+                routine("length", sorters[i], j, mainArray, lenghts, size);
+                routine("mes", sorters[i], j, mainArray, months, size);
+                routine("data", sorters[i], j, mainArray, dates, size);
+            }
+        }
+
     }
 }
