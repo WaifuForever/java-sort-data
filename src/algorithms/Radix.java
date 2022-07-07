@@ -1,6 +1,7 @@
 package src.algorithms;
 
 import src.interfaces.Sorter;
+import src.utils.ArrayHandler;
 
 public class Radix implements Sorter {
     private int getMax(Integer[] arr) {
@@ -62,13 +63,18 @@ public class Radix implements Sorter {
 
     @Override
     public void bestCase(Integer[] arr) {
-        // CONSTANT
-        
+        // Best Case is when the pivot element divides the list into two equal halves by
+        // coming exactly in the middle position.
+        sortArray(arr);
     }
 
     @Override
     public void worstCase(Integer[] arr) {
-        // CONSTANT
-        
+        // Already sorted worst case occurs when the pivot element is either greatest or
+        // smallest element.
+        // The current implementation will already perform the worstcase when the array
+        // is already sorted
+        sortArray(arr);
+        ArrayHandler.reverseArrayInPlace(arr);
     }
 }
