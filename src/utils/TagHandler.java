@@ -2,17 +2,17 @@ package src.utils;
 
 public class TagHandler {
 
-    public CustomArray<String> reorderArray(Integer tags[], CustomArray<String> data, int skip) {
+    public CustomArray<String> reorderArray(Integer positions[], CustomArray<String> data, int skip) {
         CustomArray<String> newCustomArray = new CustomArray<String>(data.getSize());
 
         for (int i = 0; i < skip; i++) {
             newCustomArray.add(data.get(i));
         }
 
-        for (int i = 0; i < tags.length; i++) {
-            // newCustomArray.add(data.get(ArrayHandler.sequentialSearch(oldTags, tags[i]) +
+        for (int i = 0; i < positions.length; i++) {
+            // newCustomArray.add(data.get(ArrayHandler.sequentialSearch(oldpositions, positions[i]) +
             // skip));
-            newCustomArray.add(data.get(tags[i] + skip));
+            newCustomArray.add(data.get(positions[i] + skip));
         }
 
         return newCustomArray;

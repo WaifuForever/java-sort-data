@@ -103,13 +103,13 @@ public class ArrayHandler {
         int index = 0;
         for (int i = arr.length - 1; i >= 0; i--) {
             T ax = arr[index];
-            if(index<i){
+            if (index < i) {
                 arr[index] = arr[i];
                 arr[i] = ax;
             }
             index++;
         }
-       //return temp;
+        // return temp;
     }
 
     public static <T> T[] reverseArray(T[] arr) {
@@ -124,10 +124,19 @@ public class ArrayHandler {
 
     public static <T> void printArray(T[] array) {
         System.out.println(Arrays.toString(array));
+
     }
 
     public static void printArray(long[] array) {
         System.out.println(Arrays.toString(array));
+
+    }
+
+    public static void printArray(CustomArray array) {
+        for (int i = 0; i < array.getSize(); i++) {
+            System.out.println(array.get(i));
+        }
+
     }
 
     public static int[] pushIntoArray(int[] arr, int element) {

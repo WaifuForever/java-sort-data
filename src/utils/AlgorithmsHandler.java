@@ -28,13 +28,9 @@ public class AlgorithmsHandler {
         long time[] = new long[circleSize];
         String[] cases = new String[] { "piorCaso", "medioCaso", "melhorCaso" };
 
-        ArrayHandler.shuffleArray(data);
         Integer[] originalData = ArrayHandler.copyArray(data);
+        ArrayHandler.shuffleArray(data);
 
-        
-        System.out.println(title +" -- " + cases[permutation]);
- 
-        
         for (int i = 0; i < circleSize; i++) {
             ArrayHandler.shuffleArray(data);
 
@@ -55,32 +51,18 @@ public class AlgorithmsHandler {
             long startTime = System.nanoTime();
             sorter.sortArray(data);
             long endTime = System.nanoTime();
-            /*
-             * System.out.println();
-             * System.out.println();
-             * 
-             * ArrayHandler.printArray(shuffledData);
-             */
 
             time[i] = endTime - startTime;
         }
-        
-         
-        ArrayHandler.printArray(averageTime(time, 3));
-        ArrayHandler.printArray(shuffledData);
-        ArrayHandler.printArray(originalData);
-        
-       
 
         originalData = ArrayHandler.generateIndexArray(shuffledData, originalData);
-        shuffledData = ArrayHandler.generateIndexArray(shuffledData, ArrayHandler.copyArray(data));
 
-        ArrayHandler.printArray(originalData);
-        System.out.println();
-        System.out.println();
+        shuffledData = ArrayHandler.generateIndexArray(shuffledData, ArrayHandler.copyArray(data));
 
         mainArray = tagHandler.reorderArray(originalData, mainArray, 1);
         mainArray = tagHandler.reorderArray(shuffledData, mainArray, 1);
+
+        ArrayHandler.printArray(averageTime(time, 3));
         title = "passwords_" + title + "_" + sorter.getClass().getSimpleName() + "Sort_" + cases[permutation] + "_.csv";
 
         fh.write(title, mainArray, 0, true);

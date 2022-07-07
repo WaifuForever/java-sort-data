@@ -20,7 +20,7 @@ public class App {
         String[] filenames = { "passwords.csv", "passwords_classifier.csv", "filtered_passwords_classifier.csv",
                 "passwords_formated_data.csv" };
 
-        CustomArray<String> data = fh.read(filenames[0], 100);
+        CustomArray<String> data = fh.read(filenames[0], 200);
 
         data.update(0, data.get(0) + ",classification");
         // generates passwords_classifier
