@@ -9,6 +9,7 @@ public class CustomArray<T> {
         for (int i = 0; i < array.length; i++) {
             this.array[i] = array[i];
         }
+        size = array.length;
     }
 
     public CustomArray(int length) {

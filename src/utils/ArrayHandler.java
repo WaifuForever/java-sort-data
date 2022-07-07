@@ -31,8 +31,8 @@ public class ArrayHandler {
             return indexArray;
 
         for (int i = 0; i < indexArray.length; i++) {
-            indexArray[i] = sequentialSearch(doppelganger, original[i]);
-            doppelganger[indexArray[i]] = -1;
+            indexArray[i] = sequentialSearch(original, doppelganger[i]);
+            doppelganger[i] = -1;
 
         }
 
@@ -41,8 +41,11 @@ public class ArrayHandler {
 
     public static int sequentialSearch(Integer[] list, int target) {
         for (int i = 0; i < list.length; i++) {
-            if (list[i] == target)
+            if (list[i] == target) {
+                list[i] = -1;
                 return i;
+            }
+
         }
         return -1;
     }
@@ -51,19 +54,6 @@ public class ArrayHandler {
         if (n == 1 || n == 0)
             return true;
         return array[n - 2] <= array[n - 1] && isSorted(array, n - 1);
-    }
-
-    public static String[] pushIntoArray(String[] arr, String element) {
-
-        String[] newArray = new String[arr.length + 1];
-
-        for (int i = 0; i < arr.length; i++) {
-            newArray[i] = arr[i];
-        }
-
-        newArray[newArray.length - 1] = element;
-        // System.out.println(Arrays.toString(newArray));
-        return newArray;
     }
 
     public static <T> T[] sliceArray(T[] array, int startIndex, int endIndex) {
@@ -139,16 +129,13 @@ public class ArrayHandler {
 
     }
 
-    public static int[] pushIntoArray(int[] arr, int element) {
+    public static void mirrorArray(Integer[] arr, Integer[] arr2) {
 
-        int[] newArray = new int[arr.length + 1];
+        if (arr.length == arr2.length)
 
-        for (int i = 0; i < arr.length; i++) {
-            newArray[i] = arr[i];
-        }
+            for (int i = 0; i < arr.length; i++) {
+                arr[i] = arr2[i];
+            }
 
-        newArray[newArray.length - 1] = element;
-        // System.out.println(Arrays.toString(newArray));
-        return newArray;
     }
 }

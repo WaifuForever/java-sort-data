@@ -24,14 +24,19 @@ public class AlgorithmsHandler {
             Integer[] data,
             int circleSize) {
 
-        Integer[] shuffledData = null;
         long time[] = new long[circleSize];
         String[] cases = new String[] { "piorCaso", "medioCaso", "melhorCaso" };
 
         Integer[] originalData = ArrayHandler.copyArray(data);
-        ArrayHandler.shuffleArray(data);
+        
+        /*
+         * System.out.println("The way it is:");
+         * ArrayHandler.printArray(mainArray);
+         * System.out.println("\n");
+         */
 
         for (int i = 0; i < circleSize; i++) {
+
             ArrayHandler.shuffleArray(data);
 
             switch (permutation) {
@@ -46,26 +51,46 @@ public class AlgorithmsHandler {
                     break;
             }
 
-            shuffledData = ArrayHandler.copyArray(data);
-
             long startTime = System.nanoTime();
             sorter.sortArray(data);
             long endTime = System.nanoTime();
 
             time[i] = endTime - startTime;
         }
+        /*
+         * System.out.println("Arrays relation");
+         * System.out.printf("OriginalData: ");
+         * ArrayHandler.printArray(originalData);
+         * System.out.printf("Sorted Data: ");
+         * ArrayHandler.printArray(data);
+         */
 
-        originalData = ArrayHandler.generateIndexArray(shuffledData, originalData);
+        Integer[] indexArray = ArrayHandler.generateIndexArray(ArrayHandler.copyArray(originalData),
+                ArrayHandler.copyArray(data));
+        /*
+         * System.out.printf("indexArray: ");
+         * ArrayHandler.printArray(indexArray);
+         * System.out.println();
+         */
+        tagHandler.reorderArray(indexArray, mainArray, 1);
+        // System.out.println("Sorted:");
 
-        shuffledData = ArrayHandler.generateIndexArray(shuffledData, ArrayHandler.copyArray(data));
-
-        mainArray = tagHandler.reorderArray(originalData, mainArray, 1);
-        mainArray = tagHandler.reorderArray(shuffledData, mainArray, 1);
-
+        // ArrayHandler.printArray(mainArray);
+        // System.out.println();
         ArrayHandler.printArray(averageTime(time, 3));
-        title = "passwords_" + title + "_" + sorter.getClass().getSimpleName() + "Sort_" + cases[permutation] + "_.csv";
 
+        title = "passwords_" + title + "_" + sorter.getClass().getSimpleName() + "Sort_" + cases[permutation] + "_.csv";
         fh.write(title, mainArray, 0, true);
+
+        indexArray = ArrayHandler.generateIndexArray(ArrayHandler.copyArray(data),
+                ArrayHandler.copyArray(originalData));
+        tagHandler.reorderArray(indexArray, mainArray, 1);
+        /*
+         * System.out.println("The way it was:");
+         * ArrayHandler.printArray(mainArray);
+         * System.out.println("\n");
+         */
+        ArrayHandler.mirrorArray(data, originalData);
     }
 
     private static Integer dateToInt(String line) {
@@ -114,10 +139,14 @@ public class AlgorithmsHandler {
 
         for (int i = 0; i < sorters.length; i++) {
             for (int j = 0; j < 3; j++) {
+                System.out.println(sorters[i].getClass().getSimpleName() + "Sort");
                 routine("length", sorters[i], j, mainArray, lenghts, size);
                 routine("mes", sorters[i], j, mainArray, months, size);
                 routine("data", sorters[i], j, mainArray, dates, size);
+                System.out.println();
+
             }
+
         }
 
     }

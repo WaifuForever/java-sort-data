@@ -2,20 +2,16 @@ package src.utils;
 
 public class TagHandler {
 
-    public CustomArray<String> reorderArray(Integer positions[], CustomArray<String> data, int skip) {
-        CustomArray<String> newCustomArray = new CustomArray<String>(data.getSize());
-
-        for (int i = 0; i < skip; i++) {
-            newCustomArray.add(data.get(i));
-        }
+    public void reorderArray(Integer positions[], CustomArray<String> mainArray, int skip) {
+        CustomArray<String> temp = new CustomArray(mainArray.getArray());
 
         for (int i = 0; i < positions.length; i++) {
-            // newCustomArray.add(data.get(ArrayHandler.sequentialSearch(oldpositions, positions[i]) +
+            // newCustomArray.add(mainArray.get(ArrayHandler.sequentialSearch(oldpositions,
+            // positions[i]) +
             // skip));
-            newCustomArray.add(data.get(positions[i] + skip));
-        }
+            mainArray.update(i + skip, temp.get(positions[i] + skip));
 
-        return newCustomArray;
+        }
     }
 
     public Integer[] getStringTagsFromArray(CustomArray<String> data, int skip, int index) {
