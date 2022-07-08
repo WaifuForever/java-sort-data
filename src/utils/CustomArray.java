@@ -53,8 +53,11 @@ public class CustomArray<T> {
         size++;
     }
 
-    public T get(int index) {
-        return array[index];
+    public T get(int n) {
+        if (n > size || n < 0) {
+            throw new ArrayIndexOutOfBoundsException();
+        }
+        return array[n];
     }
 
     public void update(int index, T newValue) {
@@ -71,6 +74,7 @@ public class CustomArray<T> {
     public int getSize() {
         return size;
     }
+
 
     private void doubleArray() {
         T[] temp = (T[]) new Object[array.length * 2];

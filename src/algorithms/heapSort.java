@@ -16,7 +16,7 @@ public class heapSort implements Sorter {
         System.out.println(Arrays.toString(dados));
     }*/
 
-    public void sortArray(Integer[] dados) {
+    public void sortArray(int[] dados) {
         for (int i = dados.length / 2 - 1; i >= 0; i--) {
             montar(dados, dados.length, i);
         }
@@ -28,7 +28,7 @@ public class heapSort implements Sorter {
         }
     }
 
-    public void montar(Integer[] dados, int size, int i) {
+    public void montar(int[] dados, int size, int i) {
         int largest = i;
         int left = (2 * i) + 1;
         int right = (2 * i) + 2;
@@ -48,14 +48,14 @@ public class heapSort implements Sorter {
     }
 
     @Override
-    public void bestCase(Integer[] arr) {
+    public void bestCase(int[] arr) {
         // Best Case is when the pivot element divides the list into two equal halves by
         // coming exactly in the middle position.
         sortArray(arr);
     }
 
     @Override
-    public void worstCase(Integer[] arr) {
+    public void worstCase(int[] arr) {
         // Already sorted worst case occurs when the pivot element is either greatest or
         // smallest element.
         // The current implementation will already perform the worstcase when the array

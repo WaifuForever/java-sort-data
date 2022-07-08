@@ -31,7 +31,7 @@ public class MedianQuickSort implements Sorter{
 		System.out.println("\tComparisons: " + numComps);
 	}*/
 
-	public static Integer medianPivot(Integer arr[], int low, int high) {
+	public static int medianPivot(int arr[], int low, int high) {
 		/*
 		 * create subarray with low, high, and middle elements in the array sort the
 		 * subarray and use index 1 as the median of 3
@@ -65,7 +65,7 @@ public class MedianQuickSort implements Sorter{
 
 	// ----------------------------------------------------------------------
 	/* method for medianQuicksort */
-	public void sortArray(Integer arr[]) {
+	public void sortArray(int arr[]) {
 		if (0 >= arr.length)
 			return;
 		if (0 < arr.length) {
@@ -75,7 +75,7 @@ public class MedianQuickSort implements Sorter{
 	}
 
 	// -----------------------------------------------------------------------
-	public static void QuickSort(Integer arr[], int low, int high) {
+	public static void QuickSort(int arr[], int low, int high) {
 
 		if (low < high) {
 			int pi = partition(arr, low, high);
@@ -88,7 +88,7 @@ public class MedianQuickSort implements Sorter{
 	}
 
 	// -----------------------------------------------------------------------
-	public static Integer partition(Integer arr[], int low, int high) {
+	public static int partition(int arr[], int low, int high) {
 		int pivot = arr[high];
 		int i = (low - 1); // index of smaller element
 
@@ -99,7 +99,7 @@ public class MedianQuickSort implements Sorter{
 				i++;
 
 				// swap arr[i] and arr[j]
-				Integer temp = arr[i];
+				int temp = arr[i];
 				arr[i] = arr[j];
 				arr[j] = temp;
 				numSwaps++;
@@ -108,7 +108,7 @@ public class MedianQuickSort implements Sorter{
 		}
 
 		// swap arr[i+1] and arr[high] (or pivot)
-		Integer temp = arr[i + 1];
+		int temp = arr[i + 1];
 		arr[i + 1] = arr[high];
 		arr[high] = temp;
 		numSwaps++;
@@ -116,14 +116,14 @@ public class MedianQuickSort implements Sorter{
 	}
 
     @Override
-    public void bestCase(Integer[] arr) {
+    public void bestCase(int[] arr) {
         // Best Case is when the pivot element divides the list into two equal halves by
         // coming exactly in the middle position.
         sortArray(arr);
     }
 
     @Override
-    public void worstCase(Integer[] arr) {
+    public void worstCase(int[] arr) {
         // Already sorted worst case occurs when the pivot element is either greatest or
         // smallest element.
         // The current implementation will already perform the worstcase when the array

@@ -8,7 +8,7 @@ public class Merge implements Sorter {
     private class PermutateWorstCase {
 
         // Function to join left and right subarray
-        public void join(Integer arr[], Integer left[], Integer right[],
+        public void join(int arr[], int left[], int right[],
                 int l, int m, int r) {
             int i;
             for (i = 0; i <= m - l; i++)
@@ -20,7 +20,7 @@ public class Merge implements Sorter {
 
         // Function to store alternate elements in left
         // and right subarray
-        void split(Integer arr[], Integer left[], Integer right[],
+        void split(int arr[], int left[], int right[],
                 int l, int m, int r) {
             for (int i = 0; i <= m - l; i++)
                 left[i] = arr[i * 2];
@@ -30,13 +30,13 @@ public class Merge implements Sorter {
         }
 
         // Function to generate Worst Case of Merge Sort
-        void generateWorstCase(Integer arr[], int l, int r) {
+        void generateWorstCase(int arr[], int l, int r) {
             if (l < r) {
                 int m = l + (r - l) / 2;
 
                 // create two auxiliary arrays
-                Integer[] left = new Integer[m - l + 1];
-                Integer[] right = new Integer[r - m];
+                int[] left = new int[m - l + 1];
+                int[] right = new int[r - m];
 
                 // Store alternate array elements in left
                 // and right subarray
@@ -52,19 +52,19 @@ public class Merge implements Sorter {
         }
     }
 
-    private void mergeSort(Integer[] arr) {
+    private void mergeSort(int[] arr) {
         int length = arr.length;
 
         if (length < 2)
             return;
 
-        Integer[] left = Arrays.copyOfRange(arr, 0, length / 2), right = Arrays.copyOfRange(arr, (length / 2), length);
+        int[] left = Arrays.copyOfRange(arr, 0, length / 2), right = Arrays.copyOfRange(arr, (length / 2), length);
         mergeSort(left);
         mergeSort(right);
         merge(arr, left, right);
     }
 
-    private void merge(Integer[] arr, Integer[] left, Integer[] right) {
+    private void merge(int[] arr, int[] left, int[] right) {
         int i = 0, j = 0, k = 0;
 
         while (i < left.length && j < right.length) {
@@ -93,19 +93,19 @@ public class Merge implements Sorter {
         }
     }
 
-    public void sortArray(Integer[] arr) {
+    public void sortArray(int[] arr) {
         mergeSort(arr);
 
     }
 
     @Override
-    public void bestCase(Integer[] arr) {
+    public void bestCase(int[] arr) {
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    public void worstCase(Integer[] arr) {
+    public void worstCase(int[] arr) {
         new PermutateWorstCase().generateWorstCase(arr, 0, arr.length - 1);
 
     }

@@ -2,7 +2,7 @@ package src.utils;
 
 public class TagHandler {
 
-    public void reorderArray(Integer positions[], CustomArray<String> mainArray, int skip) {
+    public void reorderArray(int positions[], CustomArray<String> mainArray, int skip) {
         CustomArray<String> temp = new CustomArray(mainArray.getArray());
 
         for (int i = 0; i < positions.length; i++) {
@@ -14,11 +14,11 @@ public class TagHandler {
         }
     }
 
-    public Integer[] getStringTagsFromArray(CustomArray<String> data, int skip, int index) {
+    public int[] getStringTagsFromArray(CustomArray<String> data, int skip, int index) {
         if (index < 0 || index > 5)
             index = 0;
         int size = data.getSize() - skip;
-        Integer[] arr = new Integer[size];
+        int[] arr = new int[size];
 
         for (int i = 0; i < size; i++) {
             System.out.printf("%d %d\n", size, i);
@@ -32,9 +32,9 @@ public class TagHandler {
         return arr;
     }
 
-    public Integer[] getNumberTagsFromArray(CustomArray<String> data, int skip, int index) {
+    public int[] getNumberTagsFromArray(CustomArray<String> data, int skip, int index) {
         int size = data.getSize() - skip;
-        Integer[] arr = new Integer[size];
+        int[] arr = new int[size];
 
         for (int i = 0; i < size; i++) {
             // System.out.printf("i = %d, skip = %d\n", i, skip);
@@ -46,9 +46,9 @@ public class TagHandler {
         return arr;
     }
 
-    public Integer[] getTagsArray(CustomArray<String> data, int index) {
+    public int[] getTagsArray(CustomArray<String> data, int index) {
         int size = data.getSize() - index;
-        Integer[] arr = new Integer[size];
+        int[] arr = new int[size];
 
         for (int i = 0; i < size; i++) {
             // System.out.printf("i = %d, index = %d\n", i, index);

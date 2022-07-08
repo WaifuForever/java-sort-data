@@ -18,16 +18,16 @@ public class AlgorithmsHandler {
             new Selection(),
             new Merge(), new Quick(), new Radix(), new Selection() };
 
-    private static Sorter[] sorters = new Sorter[] { new Quick() };
+    private static Sorter[] sorters = new Sorter[] { new Bucket() };
 
     private static void routine(String title, Sorter sorter, int permutation, CustomArray<String> mainArray,
-            Integer[] data,
+            int[] data,
             int circleSize) {
 
         long time[] = new long[circleSize];
         String[] cases = new String[] { "piorCaso", "medioCaso", "melhorCaso" };
 
-        Integer[] originalData = ArrayHandler.copyArray(data);
+        int[] originalData = ArrayHandler.copyArray(data);
         
         /*
          * System.out.println("The way it is:");
@@ -65,7 +65,7 @@ public class AlgorithmsHandler {
          * ArrayHandler.printArray(data);
          */
 
-        Integer[] indexArray = ArrayHandler.generateIndexArray(ArrayHandler.copyArray(originalData),
+        int[] indexArray = ArrayHandler.generateIndexArray(ArrayHandler.copyArray(originalData),
                 ArrayHandler.copyArray(data));
         /*
          * System.out.printf("indexArray: ");
@@ -93,7 +93,7 @@ public class AlgorithmsHandler {
         ArrayHandler.mirrorArray(data, originalData);
     }
 
-    private static Integer dateToInt(String line) {
+    private static int dateToInt(String line) {
         String[] date = line.split(" ", 2)[0].split("-", 3);
         // System.out.println(ArrayHandler.concatArray(date));
         return Integer.parseInt(date[0].concat(date[1]).concat(date[2]));
@@ -117,9 +117,9 @@ public class AlgorithmsHandler {
     }
 
     public static void sortData(CustomArray<String> mainArray) {
-        int size = 1000;
-        Integer[] dates = new Integer[mainArray.getSize() - 1],
-                months = new Integer[mainArray.getSize() - 1], lenghts = new Integer[mainArray.getSize() - 1];
+        int size = 1;
+        int[] dates = new int[mainArray.getSize() - 1],
+                months = new int[mainArray.getSize() - 1], lenghts = new int[mainArray.getSize() - 1];
 
         // String prefix, string case, int index
         // 3 sort date
@@ -138,10 +138,10 @@ public class AlgorithmsHandler {
         lenghts = tagHandler.getNumberTagsFromArray(mainArray, 1, 2);
 
         for (int i = 0; i < sorters.length; i++) {
-            for (int j = 0; j < 3; j++) {
+            for (int j = 0; j < 1; j++) {
                 System.out.println(sorters[i].getClass().getSimpleName() + "Sort");
-                routine("length", sorters[i], j, mainArray, lenghts, size);
-                routine("mes", sorters[i], j, mainArray, months, size);
+                //routine("length", sorters[i], j, mainArray, lenghts, size);
+                //routine("mes", sorters[i], j, mainArray, months, size);
                 routine("data", sorters[i], j, mainArray, dates, size);
                 System.out.println();
 

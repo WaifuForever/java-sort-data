@@ -4,11 +4,11 @@ import src.interfaces.Sorter;
 import src.utils.ArrayHandler;
 
 public class Quick implements Sorter {
-    private void swap(Integer[] arr, int i, int j) {
+    private void swap(int[] arr, int i, int j) {
         arr[i] = (arr[i] + arr[j]) - (arr[j] = arr[i]);
     }
 
-    private int partition(Integer[] arr, int left, int right) {
+    private int partition(int[] arr, int left, int right) {
         int p = arr[left];
         int i = left + 1;
         int j = right;
@@ -25,7 +25,7 @@ public class Quick implements Sorter {
         return j;
     }
 
-    private void quickSort(Integer[] arr, int left, int right) {
+    private void quickSort(int[] arr, int left, int right) {
         if (left < right) {
             int pivot = partition(arr, left, right);
             quickSort(arr, left, pivot - 1);
@@ -33,13 +33,13 @@ public class Quick implements Sorter {
         }
     }
 
-    public void sortArray(Integer[] arr) {
+    public void sortArray(int[] arr) {
         quickSort(arr, 0, arr.length - 1);
 
     }
 
     @Override
-    public void bestCase(Integer[] arr) {
+    public void bestCase(int[] arr) {
         // Best Case is when the pivot element divides the list into two equal halves by
         // coming exactly in the middle position.
         partition(arr, 0, arr.length-1);
@@ -47,7 +47,7 @@ public class Quick implements Sorter {
     }
 
     @Override
-    public void worstCase(Integer[] arr) {
+    public void worstCase(int[] arr) {
         // Already sorted worst case occurs when the pivot element is either greatest or
         // smallest element.
         // The current implementation will already perform the worstcase when the array

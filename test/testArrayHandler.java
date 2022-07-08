@@ -20,12 +20,12 @@ public class testArrayHandler {
 
     private static void testReOrderArray(String[] words, int skip) {
 
-        Integer[] wordPositions = new Integer[words.length - skip];
+        int[] wordPositions = new int[words.length - skip];
         for (int i = 0; i < words.length - skip; i++){
             wordPositions[i] = i;
         }
 
-        Integer[] shuffledPositions = ArrayHandler.copyArray(wordPositions);
+        int[] shuffledPositions = ArrayHandler.copyArray(wordPositions);
         ArrayHandler.shuffleArray(shuffledPositions);
 
         CustomArray<String> customArray = new CustomArray<>(words);
@@ -37,7 +37,7 @@ public class testArrayHandler {
         System.out.println();
         System.out.println();
 
-        Integer[] indexArray = ArrayHandler.generateIndexArray(ArrayHandler.copyArray(shuffledPositions),
+        int[] indexArray = ArrayHandler.generateIndexArray(ArrayHandler.copyArray(shuffledPositions),
                 ArrayHandler.copyArray(shuffledPositions));
         tagHandler.reorderArray(indexArray, customArray, skip);
         // SECOND BLOCK

@@ -16,7 +16,23 @@ public class ArrayHandler {
         }
     }
 
+    public static void shuffleArray(int[] arr) {
+        Random r = new Random();
+
+        for (int i = arr.length - 1; i > 0; i--) {
+            int j = r.nextInt(i + 1);
+            int temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+
+        }
+    }
+
     public static <T> T[] copyArray(T[] array) {
+        return Arrays.copyOf(array, array.length);
+    }
+
+    public static int[] copyArray(int[] array) {
         return Arrays.copyOf(array, array.length);
     }
 
@@ -24,8 +40,8 @@ public class ArrayHandler {
      * generate an index array refering the relation of the original array with the
      * doppelganger array original -> doppelganger
      */
-    public static Integer[] generateIndexArray(Integer[] original, Integer[] doppelganger) {
-        Integer[] indexArray = new Integer[original.length];
+    public static int[] generateIndexArray(int[] original, int[] doppelganger) {
+        int[] indexArray = new int[original.length];
 
         if (original.length != doppelganger.length)
             return indexArray;
@@ -39,7 +55,7 @@ public class ArrayHandler {
         return indexArray;
     }
 
-    public static int sequentialSearch(Integer[] list, int target) {
+    public static int sequentialSearch(int[] list, int target) {
         for (int i = 0; i < list.length; i++) {
             if (list[i] == target) {
                 list[i] = -1;
@@ -50,13 +66,17 @@ public class ArrayHandler {
         return -1;
     }
 
-    public static boolean isSorted(Integer[] array, int n) {
+    public static boolean isSorted(int[] array, int n) {
         if (n == 1 || n == 0)
             return true;
         return array[n - 2] <= array[n - 1] && isSorted(array, n - 1);
     }
 
     public static <T> T[] sliceArray(T[] array, int startIndex, int endIndex) {
+        return Arrays.copyOfRange(array, startIndex, endIndex);
+    }
+
+    public static int[] sliceArray(int[] array, int startIndex, int endIndex) {
         return Arrays.copyOfRange(array, startIndex, endIndex);
     }
 
@@ -72,8 +92,20 @@ public class ArrayHandler {
         return result;
     }
 
+    public static int[] concatWithArrayCopy(int[] array1, int[] array2) {
+        int[] result = Arrays.copyOf(array1, array1.length + array2.length);
+        System.arraycopy(array2, 0, result, array1.length, array2.length);
+        return result;
+    }
+
     public static <T> void swap(T[] arr, int i, int j) {
         T temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+
+    public static void swap(int[] arr, int i, int j) {
+        int temp = arr[i];
         arr[i] = arr[j];
         arr[j] = temp;
     }
@@ -102,6 +134,19 @@ public class ArrayHandler {
         // return temp;
     }
 
+    public static void reverseArrayInPlace(int[] arr) {
+        int index = 0;
+        for (int i = arr.length - 1; i >= 0; i--) {
+            int ax = arr[index];
+            if (index < i) {
+                arr[index] = arr[i];
+                arr[i] = ax;
+            }
+            index++;
+        }
+        // return temp;
+    }
+
     public static <T> T[] reverseArray(T[] arr) {
         T[] temp = arr.clone();
         int index = 0;
@@ -112,7 +157,22 @@ public class ArrayHandler {
         return temp;
     }
 
+    public static int[] reverseArray(int[] arr) {
+        int[] temp = arr.clone();
+        int index = 0;
+        for (int i = arr.length - 1; i >= 0; i--) {
+            temp[index] = arr[i];
+            index++;
+        }
+        return temp;
+    }
+
     public static <T> void printArray(T[] array) {
+        System.out.println(Arrays.toString(array));
+
+    }
+
+    public static void printArray(int[] array) {
         System.out.println(Arrays.toString(array));
 
     }
@@ -129,7 +189,7 @@ public class ArrayHandler {
 
     }
 
-    public static void mirrorArray(Integer[] arr, Integer[] arr2) {
+    public static void mirrorArray(int[] arr, int[] arr2) {
 
         if (arr.length == arr2.length)
 

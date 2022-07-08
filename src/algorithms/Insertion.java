@@ -4,7 +4,7 @@ import src.interfaces.Sorter;
 import src.utils.ArrayHandler;
 
 public class Insertion implements Sorter {
-    private void insertionSort(Integer[] arr) {
+    private void insertionSort(int[] arr) {
         int j, key;
         for (int i = 1; i < arr.length; i++) {
             key = arr[i];
@@ -19,20 +19,20 @@ public class Insertion implements Sorter {
 
     }
 
-    public void sortArray(Integer[] arr) {
+    public void sortArray(int[] arr) {
         insertionSort(arr);
 
     }
 
     @Override
-    public void bestCase(Integer[] arr) {
+    public void bestCase(int[] arr) {
         // Best Case is when the pivot element divides the list into two equal halves by
         // coming exactly in the middle position.
         sortArray(arr);
     }
 
     @Override
-    public void worstCase(Integer[] arr) {
+    public void worstCase(int[] arr) {
         // Already sorted worst case occurs when the pivot element is either greatest or
         // smallest element.
         // The current implementation will already perform the worstcase when the array
