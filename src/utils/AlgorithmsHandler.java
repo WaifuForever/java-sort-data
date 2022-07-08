@@ -16,11 +16,11 @@ public class AlgorithmsHandler {
     private static TagHandler tagHandler = new TagHandler();
     private static FileHandler fh = new FileHandler();
 
-    private static Sorter[] sorters2 = new Sorter[] { new Bubble(), new Bucket(), new Counting(), new Heap(), new Insertion(),
-            new Selection(), new Insertion(), new MedianQuickSort(),
+    private static Sorter[] sorters = new Sorter[] { new Bubble(), new Bucket(), new Counting(), new Heap(), new Insertion(),
+            new Selection(), new Insertion(),
             new Merge(), new Quick(), new Radix(), new Selection() };
 
-    private static Sorter[] sorters = new Sorter[] { new MedianQuickSort() };
+    private static Sorter[] sorters2 = new Sorter[] { new MedianQuickSort() };
 
     private static void routine(String title, Sorter sorter, int permutation, CustomArray<String> mainArray,
             int[] data,
@@ -119,7 +119,7 @@ public class AlgorithmsHandler {
     }
 
     public static void sortData(CustomArray<String> mainArray) {
-        int size = 10000;
+        int size = 1;
         int[] dates = new int[mainArray.getSize() - 1],
                 months = new int[mainArray.getSize() - 1], lenghts = new int[mainArray.getSize() - 1];
 

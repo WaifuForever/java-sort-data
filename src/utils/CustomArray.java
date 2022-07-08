@@ -61,7 +61,9 @@ public class CustomArray<T> {
     @SuppressWarnings("unchecked")
     public void add(T element) {
         if (size == array.length)
-            doubleArray((Class<T>) array.getClass());
+            doubleArray();
+        //if (size == array.length)
+          //  doubleArray((Class<T>) array.getClass());
 
         array[size] = element;
         size++;
@@ -87,6 +89,15 @@ public class CustomArray<T> {
 
     public int getSize() {
         return size;
+    }
+
+    private void doubleArray() {
+        T[] temp = (T[]) new Object[array.length * 2];
+        for (int i = 0; i < size; i++) {
+            temp[i] = array[i];
+        }
+        array = temp;
+
     }
 
     private void doubleArray(Class<T> c) {
