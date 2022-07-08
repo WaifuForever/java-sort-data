@@ -3,7 +3,9 @@ package src.utils;
 import src.algorithms.Bubble;
 import src.algorithms.Bucket;
 import src.algorithms.Counting;
+import src.algorithms.Heap;
 import src.algorithms.Insertion;
+import src.algorithms.MedianQuickSort;
 import src.algorithms.Merge;
 import src.algorithms.Quick;
 import src.algorithms.Radix;
@@ -14,11 +16,11 @@ public class AlgorithmsHandler {
     private static TagHandler tagHandler = new TagHandler();
     private static FileHandler fh = new FileHandler();
 
-    private static Sorter[] sorters2 = new Sorter[] { new Bubble(), new Bucket(), new Counting(), new Insertion(),
-            new Selection(),
+    private static Sorter[] sorters2 = new Sorter[] { new Bubble(), new Bucket(), new Counting(), new Heap(), new Insertion(),
+            new Selection(), new Insertion(), new MedianQuickSort(),
             new Merge(), new Quick(), new Radix(), new Selection() };
 
-    private static Sorter[] sorters = new Sorter[] { new Counting() };
+    private static Sorter[] sorters = new Sorter[] { new MedianQuickSort() };
 
     private static void routine(String title, Sorter sorter, int permutation, CustomArray<String> mainArray,
             int[] data,
@@ -54,7 +56,7 @@ public class AlgorithmsHandler {
             long startTime = System.nanoTime();
             sorter.sortArray(data);
             long endTime = System.nanoTime();
-
+          
             time[i] = endTime - startTime;
         }
         /*
@@ -117,7 +119,7 @@ public class AlgorithmsHandler {
     }
 
     public static void sortData(CustomArray<String> mainArray) {
-        int size = 1;
+        int size = 10000;
         int[] dates = new int[mainArray.getSize() - 1],
                 months = new int[mainArray.getSize() - 1], lenghts = new int[mainArray.getSize() - 1];
 

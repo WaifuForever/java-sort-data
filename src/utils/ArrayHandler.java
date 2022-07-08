@@ -117,9 +117,7 @@ public class ArrayHandler {
     }
 
     public static void swap(int[] arr, int i, int j) {
-        int temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
+        arr[i] = (arr[i] + arr[j]) - (arr[j] = arr[i]);
     }
 
     public static String concatArray(String[] array, String inBetween) {

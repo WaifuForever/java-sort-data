@@ -2,12 +2,9 @@ package src.algorithms;
 
 import src.interfaces.Sorter;
 //import src.utils.ArrayHandler;
+import src.utils.ArrayHandler;
 
 public class Quick implements Sorter {
-    private void swap(int[] arr, int i, int j) {
-        arr[i] = (arr[i] + arr[j]) - (arr[j] = arr[i]);
-    }
-
     private int partition(int[] arr, int left, int right) {
         int p = arr[left];
         int i = left + 1;
@@ -19,9 +16,9 @@ public class Quick implements Sorter {
             else if (arr[j] > p)
                 j--;
             else
-                swap(arr, i, j);
+                ArrayHandler.swap(arr, i, j);
         }
-        swap(arr, left, j);
+        ArrayHandler.swap(arr, left, j);
         return j;
     }
 
