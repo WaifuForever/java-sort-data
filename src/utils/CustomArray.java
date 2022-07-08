@@ -31,7 +31,7 @@ public class CustomArray<T> {
 
     @SuppressWarnings("unchecked")
     public CustomArray() {
-        this.array = (T[]) new Object[50];
+        this.array = (T[]) new Object[40];
     }
 
     private T[] array;
