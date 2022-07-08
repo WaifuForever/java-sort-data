@@ -36,11 +36,23 @@ public class ArrayHandler {
         return Arrays.copyOf(array, array.length);
     }
 
-    /*
-     * generate an index array refering the relation of the original array with the
-     * doppelganger array original -> doppelganger
-     */
+    public static <T> void reorderArray(int positions[], CustomArray<T> mainArray, int skip) {
+        CustomArray<T> temp = new CustomArray<T>(mainArray.getArray());
+
+        for (int i = 0; i < positions.length; i++) {
+            // newCustomArray.add(mainArray.get(ArrayHandler.sequentialSearch(oldpositions,
+            // positions[i]) +
+            // skip));
+            mainArray.update(i + skip, temp.get(positions[i] + skip));
+
+        }
+    }
+
     public static int[] generateIndexArray(int[] original, int[] doppelganger) {
+        /*
+         * generate an index array refering the relation of the original array with the
+         * doppelganger array original -> doppelganger
+         */
         int[] indexArray = new int[original.length];
 
         if (original.length != doppelganger.length)

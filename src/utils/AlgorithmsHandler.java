@@ -18,7 +18,7 @@ public class AlgorithmsHandler {
             new Selection(),
             new Merge(), new Quick(), new Radix(), new Selection() };
 
-    private static Sorter[] sorters = new Sorter[] { new Bucket() };
+    private static Sorter[] sorters = new Sorter[] { new Counting() };
 
     private static void routine(String title, Sorter sorter, int permutation, CustomArray<String> mainArray,
             int[] data,
@@ -28,7 +28,7 @@ public class AlgorithmsHandler {
         String[] cases = new String[] { "piorCaso", "medioCaso", "melhorCaso" };
 
         int[] originalData = ArrayHandler.copyArray(data);
-        
+
         /*
          * System.out.println("The way it is:");
          * ArrayHandler.printArray(mainArray);
@@ -72,7 +72,7 @@ public class AlgorithmsHandler {
          * ArrayHandler.printArray(indexArray);
          * System.out.println();
          */
-        tagHandler.reorderArray(indexArray, mainArray, 1);
+        ArrayHandler.reorderArray(indexArray, mainArray, 1);
         // System.out.println("Sorted:");
 
         // ArrayHandler.printArray(mainArray);
@@ -84,7 +84,7 @@ public class AlgorithmsHandler {
 
         indexArray = ArrayHandler.generateIndexArray(ArrayHandler.copyArray(data),
                 ArrayHandler.copyArray(originalData));
-        tagHandler.reorderArray(indexArray, mainArray, 1);
+        ArrayHandler.reorderArray(indexArray, mainArray, 1);
         /*
          * System.out.println("The way it was:");
          * ArrayHandler.printArray(mainArray);
@@ -138,10 +138,10 @@ public class AlgorithmsHandler {
         lenghts = tagHandler.getNumberTagsFromArray(mainArray, 1, 2);
 
         for (int i = 0; i < sorters.length; i++) {
-            for (int j = 0; j < 1; j++) {
+            for (int j = 0; j < 3; j++) {
                 System.out.println(sorters[i].getClass().getSimpleName() + "Sort");
-                //routine("length", sorters[i], j, mainArray, lenghts, size);
-                //routine("mes", sorters[i], j, mainArray, months, size);
+                routine("length", sorters[i], j, mainArray, lenghts, size);
+                routine("mes", sorters[i], j, mainArray, months, size);
                 routine("data", sorters[i], j, mainArray, dates, size);
                 System.out.println();
 

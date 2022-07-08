@@ -2,10 +2,8 @@ package test;
 
 import src.utils.ArrayHandler;
 import src.utils.CustomArray;
-import src.utils.TagHandler;
 
 public class testArrayHandler {
-    private static TagHandler tagHandler = new TagHandler();
 
     public static void main(String[] args) {
 
@@ -21,7 +19,7 @@ public class testArrayHandler {
     private static void testReOrderArray(String[] words, int skip) {
 
         int[] wordPositions = new int[words.length - skip];
-        for (int i = 0; i < words.length - skip; i++){
+        for (int i = 0; i < words.length - skip; i++) {
             wordPositions[i] = i;
         }
 
@@ -39,23 +37,25 @@ public class testArrayHandler {
 
         int[] indexArray = ArrayHandler.generateIndexArray(ArrayHandler.copyArray(shuffledPositions),
                 ArrayHandler.copyArray(shuffledPositions));
-        tagHandler.reorderArray(indexArray, customArray, skip);
+        ArrayHandler.reorderArray(indexArray, customArray, skip);
         // SECOND BLOCK
         ArrayHandler.printArray(indexArray);
         ArrayHandler.printArray(customArray);
         System.out.println();
         System.out.println();
 
-        indexArray = ArrayHandler.generateIndexArray(ArrayHandler.copyArray(shuffledPositions), ArrayHandler.copyArray(wordPositions));
+        indexArray = ArrayHandler.generateIndexArray(ArrayHandler.copyArray(shuffledPositions),
+                ArrayHandler.copyArray(wordPositions));
         System.out.println();
-        tagHandler.reorderArray(indexArray, customArray, skip);
+        ArrayHandler.reorderArray(indexArray, customArray, skip);
         ArrayHandler.printArray(wordPositions);
 
         ArrayHandler.printArray(customArray);
 
-        indexArray = ArrayHandler.generateIndexArray(ArrayHandler.copyArray(wordPositions), ArrayHandler.copyArray(shuffledPositions));
+        indexArray = ArrayHandler.generateIndexArray(ArrayHandler.copyArray(wordPositions),
+                ArrayHandler.copyArray(shuffledPositions));
         System.out.println();
-        tagHandler.reorderArray(indexArray, customArray, skip);
+        ArrayHandler.reorderArray(indexArray, customArray, skip);
         ArrayHandler.printArray(wordPositions);
 
         ArrayHandler.printArray(customArray);

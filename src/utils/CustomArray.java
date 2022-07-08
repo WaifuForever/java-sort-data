@@ -9,7 +9,7 @@ public class CustomArray<T> {
     @SuppressWarnings("unchecked")
     public CustomArray(T[] array) {
         this.array = (T[]) Array.newInstance(array[0].getClass(), array.length);
-        
+
         for (int i = 0; i < array.length; i++) {
             this.array[i] = array[i];
         }
@@ -19,7 +19,7 @@ public class CustomArray<T> {
     @SuppressWarnings("unchecked")
     public CustomArray(T[] array, int size) {
         this.array = (T[]) Array.newInstance(array[0].getClass(), size);
-        
+
         this.size = size;
     }
 
@@ -34,14 +34,13 @@ public class CustomArray<T> {
         this.array = (T[]) new Object[50];
     }
 
-
     private T[] array;
 
     public void shuffleArray(int skip) {
         T[] tempArray = getArray(skip);
         @SuppressWarnings("unchecked")
         final T[] trunkedArray = (T[]) new Object[skip];
-       
+
         ArrayHandler.shuffleArray(tempArray);
         for (int i = 0; i < skip; i++) {
             trunkedArray[i] = array[i];
@@ -93,7 +92,7 @@ public class CustomArray<T> {
     private void doubleArray(Class<T> c) {
         @SuppressWarnings("unchecked")
         final T[] result = (T[]) Array.newInstance(c, array.length * 2);
-       
+
         for (int i = 0; i < size; i++) {
             result[i] = array[i];
         }

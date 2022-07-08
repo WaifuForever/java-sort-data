@@ -114,14 +114,14 @@ public class Bucket implements Sorter {
         // Add elements into the buckets
         for (int i = 0; i < arr.length; i++) {
             int index = (arr[i] % (int) (skip * Math.pow(10, k - String.valueOf(skip).length())))
-            / (int) Math.pow(chunkSize, k - String.valueOf(skip).length() - 1);
+                    / (int) Math.pow(chunkSize, k - String.valueOf(skip).length() - 1);
             buckets.get(index).add(arr[i]);
-    
+
         }
 
         // Sort the elements of each bucket
         for (int i = 0; i < chunkSize; i++) {
-            //ArrayHandler.printArray(buckets.get(i).getArray());
+            // ArrayHandler.printArray(buckets.get(i).getArray());
             new Radix().sortArray(buckets.get(i).getArray());
 
         }
@@ -132,7 +132,7 @@ public class Bucket implements Sorter {
 
             for (int j = 0, size = buckets.get(i).getArray().length; j < size; j++) {
                 arr[index++] = buckets.get(i).get(j);
-                //System.out.println(buckets.get(i).get(j));
+                // System.out.println(buckets.get(i).get(j));
             }
         }
 
@@ -146,7 +146,7 @@ public class Bucket implements Sorter {
      * It is ineffective if we have a huge array since it increases the cost.
      */
     public void sortArray(int[] arr) {
-        bucketSort(arr, 10, 201);
+        bucketSort(arr, 10);
     }
 
     @Override
