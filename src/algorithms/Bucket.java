@@ -5,6 +5,51 @@ import src.utils.ArrayHandler;
 import src.utils.CustomArray;
 
 public class Bucket implements Sorter {
+    private class intArray {
+        private int size = 0;
+        private int[] arr;
+
+        intArray(int size) {
+            arr = new int[size];
+            this.size = size - 1;
+        }
+
+        intArray() {
+            arr = new int[0];
+        }
+
+        public void add(int n) {
+            if (isFull())
+                doubleSize();
+
+            arr[size] = n;
+            size++;
+        }
+
+        public int get(int n) {
+            if (n > size || n < 0) {
+                throw new ArrayIndexOutOfBoundsException();
+            }
+            return arr[n];
+        }
+
+        public boolean isFull() {
+            return arr.length == size;
+        }
+
+        public int[] getArray() {
+            return arr;
+        }
+
+        private void doubleSize() {
+            int[] newArr = new int[arr.length + 1];
+            for (int i = 0; i < arr.length; i++) {
+                newArr[i] = arr[i];
+            }
+            arr = newArr;
+        }
+
+    }
 
     private int getMax(int[] arr) {
         int k = 0;
@@ -22,34 +67,75 @@ public class Bucket implements Sorter {
 
         int k = String.valueOf(getMax(arr)).length();
 
-        CustomArray<CustomArray<Integer>> buckets = new CustomArray<>(chunkSize);
+        CustomArray<intArray> buckets = new CustomArray<intArray>(chunkSize);
 
         // Create empty bucketss
         for (int i = 0; i < chunkSize; i++)
-            buckets.add(new CustomArray<>());
+            buckets.add(new intArray());
 
         // Add elements into the buckets
         for (int i = 0; i < arr.length; i++) {
             buckets.get((arr[i] / (int) Math.pow(chunkSize, k - 1))).add(arr[i]);
-            
+            // System.out.println((arr[i] / (int) Math.pow(chunkSize, k - 1)));
         }
 
         // Sort the elements of each bucket
         for (int i = 0; i < chunkSize; i++) {
-            System.out.println("here");
-            ArrayHandler.printArray(buckets.get(i).getArray());
-            
-            System.out.println("here2");
-            new Radix().sortArray((buckets.get(i).getArray()));
+
+            new Radix().sortArray(buckets.get(i).getArray());
+
         }
 
         // Get the sorted array
         int index = 0;
         for (int i = 0; i < chunkSize; i++) {
+
             for (int j = 0, size = buckets.get(i).getArray().length; j < size; j++) {
                 arr[index++] = buckets.get(i).get(j);
+                // System.out.println(buckets.get(i).get(j));
             }
         }
+
+    }
+
+    public void bucketSort(int[] arr, int chunkSize, int skip) {
+
+        if (chunkSize <= 0)
+            return;
+
+        int k = String.valueOf(getMax(arr)).length();
+
+        CustomArray<intArray> buckets = new CustomArray<intArray>(chunkSize);
+
+        // Create empty bucketss
+        for (int i = 0; i < chunkSize; i++)
+            buckets.add(new intArray());
+
+        // Add elements into the buckets
+        for (int i = 0; i < arr.length; i++) {
+            int index = (arr[i] % (int) (skip * Math.pow(10, k - String.valueOf(skip).length())))
+            / (int) Math.pow(chunkSize, k - String.valueOf(skip).length() - 1);
+            buckets.get(index).add(arr[i]);
+    
+        }
+
+        // Sort the elements of each bucket
+        for (int i = 0; i < chunkSize; i++) {
+            //ArrayHandler.printArray(buckets.get(i).getArray());
+            new Radix().sortArray(buckets.get(i).getArray());
+
+        }
+
+        // Get the sorted array
+        int index = 0;
+        for (int i = 0; i < chunkSize; i++) {
+
+            for (int j = 0, size = buckets.get(i).getArray().length; j < size; j++) {
+                arr[index++] = buckets.get(i).get(j);
+                //System.out.println(buckets.get(i).get(j));
+            }
+        }
+
     }
 
     /*
@@ -60,22 +146,19 @@ public class Bucket implements Sorter {
      * It is ineffective if we have a huge array since it increases the cost.
      */
     public void sortArray(int[] arr) {
-        bucketSort(arr, 10);
+        bucketSort(arr, 10, 201);
     }
 
     @Override
     public void bestCase(int[] arr) {
-        // Best Case is when the pivot element divides the list into two equal halves by
-        // coming exactly in the middle position.
+        // is when the elements are evenly grouped in the buckets
+        // constant
         sortArray(arr);
     }
 
     @Override
     public void worstCase(int[] arr) {
-        // Already sorted worst case occurs when the pivot element is either greatest or
-        // smallest element.
-        // The current implementation will already perform the worstcase when the array
-        // is already sorted
+        // is when all the elements are placed in a single bucket
         sortArray(arr);
         ArrayHandler.reverseArrayInPlace(arr);
     }

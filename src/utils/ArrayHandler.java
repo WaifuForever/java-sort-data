@@ -182,7 +182,7 @@ public class ArrayHandler {
 
     }
 
-    public static void printArray(CustomArray array) {
+    public static <T> void printArray(CustomArray<T> array) {
         for (int i = 0; i < array.getSize(); i++) {
             System.out.println(array.get(i));
         }

@@ -1,7 +1,7 @@
 package src.algorithms;
 
 import src.interfaces.Sorter;
-import src.utils.ArrayHandler;
+//import src.utils.ArrayHandler;
 
 public class Quick implements Sorter {
     private void swap(int[] arr, int i, int j) {
@@ -42,7 +42,7 @@ public class Quick implements Sorter {
     public void bestCase(int[] arr) {
         // Best Case is when the pivot element divides the list into two equal halves by
         // coming exactly in the middle position.
-        partition(arr, 0, arr.length-1);
+        partition(arr, 0, arr.length - 1);
 
     }
 

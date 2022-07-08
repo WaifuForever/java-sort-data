@@ -2,8 +2,8 @@ package src.utils;
 
 public class TagHandler {
 
-    public void reorderArray(int positions[], CustomArray<String> mainArray, int skip) {
-        CustomArray<String> temp = new CustomArray(mainArray.getArray());
+    public <T> void reorderArray(int positions[], CustomArray<T> mainArray, int skip) {
+        CustomArray<T> temp = new CustomArray<T>(mainArray.getArray());
 
         for (int i = 0; i < positions.length; i++) {
             // newCustomArray.add(mainArray.get(ArrayHandler.sequentialSearch(oldpositions,
@@ -58,15 +58,5 @@ public class TagHandler {
         }
 
         return arr;
-    }
-
-    public <T> CustomArray<Object[]> toCustomTag(CustomArray<T> data) {
-        CustomArray<Object[]> array = new CustomArray<Object[]>(data.getSize());
-
-        for (int i = 0; i < data.getSize(); i++) {
-            array.add(new Object[] { i, data.get(i) });
-        }
-
-        return array;
     }
 }

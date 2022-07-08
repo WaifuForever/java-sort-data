@@ -1,33 +1,47 @@
 package src.utils;
 
+import java.lang.reflect.Array;
+
 public class CustomArray<T> {
 
     private int size = 0;
 
+    @SuppressWarnings("unchecked")
     public CustomArray(T[] array) {
-        this.array = (T[]) new Object[array.length];
+        this.array = (T[]) Array.newInstance(array[0].getClass(), array.length);
+        
         for (int i = 0; i < array.length; i++) {
             this.array[i] = array[i];
         }
         size = array.length;
     }
 
+    @SuppressWarnings("unchecked")
+    public CustomArray(T[] array, int size) {
+        this.array = (T[]) Array.newInstance(array[0].getClass(), size);
+        
+        this.size = size;
+    }
+
+    @SuppressWarnings("unchecked")
     public CustomArray(int length) {
-
-        array = (T[]) new Object[length > 0 ? length : 50];
+        this.array = (T[]) new Object[length > 0 ? length : 50];
 
     }
 
+    @SuppressWarnings("unchecked")
     public CustomArray() {
-        array = (T[]) new Object[50];
+        this.array = (T[]) new Object[50];
     }
+
 
     private T[] array;
 
     public void shuffleArray(int skip) {
         T[] tempArray = getArray(skip);
-        T[] trunkedArray = (T[]) new Object[skip];
-
+        @SuppressWarnings("unchecked")
+        final T[] trunkedArray = (T[]) new Object[skip];
+       
         ArrayHandler.shuffleArray(tempArray);
         for (int i = 0; i < skip; i++) {
             trunkedArray[i] = array[i];
@@ -45,9 +59,10 @@ public class CustomArray<T> {
         return ArrayHandler.sliceArray(array, 0, size);
     }
 
+    @SuppressWarnings("unchecked")
     public void add(T element) {
         if (size == array.length)
-            doubleArray();
+            doubleArray((Class<T>) array.getClass());
 
         array[size] = element;
         size++;
@@ -75,13 +90,14 @@ public class CustomArray<T> {
         return size;
     }
 
-
-    private void doubleArray() {
-        T[] temp = (T[]) new Object[array.length * 2];
+    private void doubleArray(Class<T> c) {
+        @SuppressWarnings("unchecked")
+        final T[] result = (T[]) Array.newInstance(c, array.length * 2);
+       
         for (int i = 0; i < size; i++) {
-            temp[i] = array[i];
+            result[i] = array[i];
         }
-        array = temp;
+        array = result;
 
     }
 
