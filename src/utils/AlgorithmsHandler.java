@@ -1,5 +1,8 @@
 package src.utils;
 
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+
 import src.algorithms.Bubble;
 import src.algorithms.Bucket;
 import src.algorithms.Counting;
@@ -13,10 +16,10 @@ import src.algorithms.Selection;
 import src.interfaces.Sorter;
 
 public class AlgorithmsHandler {
-    private static TagHandler tagHandler = new TagHandler();
     private static FileHandler fh = new FileHandler();
 
-    private static Sorter[] sorters = new Sorter[] { new Bubble(), new Bucket(), new Counting(), new Heap(), new Insertion(),
+    private static Sorter[] sorters = new Sorter[] { new Bubble(), new Bucket(), new Counting(), new Heap(),
+            new Insertion(),
             new Selection(), new Insertion(),
             new Merge(), new Quick(), new Radix(), new Selection() };
 
@@ -56,7 +59,7 @@ public class AlgorithmsHandler {
             long startTime = System.nanoTime();
             sorter.sortArray(data);
             long endTime = System.nanoTime();
-          
+
             time[i] = endTime - startTime;
         }
         /*
@@ -125,19 +128,41 @@ public class AlgorithmsHandler {
 
         // String prefix, string case, int index
         // 3 sort date
+        Pattern pattern = Pattern.compile("[^,]*,");
+        
+        String[] line;
         for (int j = 1; j < mainArray.getSize(); j++) {
-            String[] line = ((String) mainArray.get(j)).split(",", 5);
+            System.out.println(mainArray.get(j));
+
+            int count = 0;
+            Matcher matcher = pattern.matcher(mainArray.get(j));
+            while (matcher.find()){
+                count++;
+            }
+            
+            
+            switch (count) {
+                case 4:
+                    line = ((String) mainArray.get(j)).split(",", 5);
+                    break;
+                case 5:
+                    line = ((String) mainArray.get(j)).split(",", 6);
+                    line[1] = line[1] + ",";
+                    for (int i = 1; i < 6; i++)
+                        line[i] = line[i + 1];
+                    line = ArrayHandler.sliceArray(line, 0, 5);
+
+                    break;
+                default:
+                    line = new String[5];
+                    break;
+            }
+
             dates[j - 1] = dateToInt(line[3]);
-
-        }
-
-        for (int j = 1; j < mainArray.getSize(); j++) {
-            String[] line = ((String) mainArray.get(j)).split(",", 5);
             months[j - 1] = Integer.parseInt(line[3].substring(5, 7));
+            lenghts[j - 1] = Integer.parseInt(line[2]);
 
         }
-
-        lenghts = tagHandler.getNumberTagsFromArray(mainArray, 1, 2);
 
         for (int i = 0; i < sorters.length; i++) {
             for (int j = 0; j < 3; j++) {
