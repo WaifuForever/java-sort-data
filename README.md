@@ -3,7 +3,10 @@
 Please read our Guidelines to see what this project is about:
 - [English](GUIDELINES.md)
 - [Português](GUIDELINES.pt-BR.md)
-
+## Article and Data Analysis
+- [Article](https://github.com/WaifuForever/java-sort-data/blob/slave/LEDA_Password_Project.pdf)
+- [Grafic-1](https://github.com/WaifuForever/java-sort-data/blob/slave/synlog.png)
+- [Grafic-2](https://github.com/WaifuForever/java-sort-data/blob/slave/logn.png)
 ## How to Run
    When we actually have some code here, we're going to explain how to run it.
 ### Requirements
