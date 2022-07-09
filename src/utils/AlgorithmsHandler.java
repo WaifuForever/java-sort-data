@@ -83,16 +83,18 @@ public class AlgorithmsHandler {
         // ArrayHandler.printArray(mainArray);
         // System.out.println();
         long[] timeArray = averageTime(time, 3);
+        title = "passwords_" + title + "_" + sorter.getClass().getSimpleName() + "Sort_" + cases[permutation] + "_.csv";
+        
         try {
-            fh.writeTime(sorter.getClass().getSimpleName(), timeArray);
+            fh.writeTime(title, timeArray);
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
         ArrayHandler.printArray(timeArray);
 
-        title = "passwords_" + title + "_" + sorter.getClass().getSimpleName() + "Sort_" + cases[permutation] + "_.csv";
-        fh.write(title + "_" + cases[permutation], mainArray, 0, true);
+       
+        fh.write(title, mainArray, 0, true);
 
         indexArray = ArrayHandler.generateIndexArray(ArrayHandler.copyArray(data),
                 ArrayHandler.copyArray(originalData));

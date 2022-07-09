@@ -119,9 +119,10 @@ public class FileHandler {
     }
 
     public void writeTime(String title, long[] array) throws IOException {
-        try (PrintWriter newFile =  new PrintWriter(new BufferedWriter(new FileWriter("output/benchmark.csv", true)))) {
+        try (PrintWriter newFile =  new PrintWriter(new BufferedWriter(new FileWriter("output/benchmark.xlsx", true)))) {
            
-            for (int i = 0; i < array.length - 1; i++) {
+            title = title.substring(0, title.length() - 4);
+            for (int i = 0; i < array.length; i++) {
 
                 title += "," + String.valueOf(array[i]);
             }
