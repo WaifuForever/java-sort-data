@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import src.utils.Password;
 import src.utils.AlgorithmsHandler;
+import src.utils.ArrayHandler;
 import src.utils.CallableUtils;
 import src.utils.CustomArray;
 import src.utils.FileHandler;
@@ -20,9 +21,12 @@ public class App {
         String[] filenames = { "passwords.csv", "passwords_classifier.csv", "filtered_passwords_classifier.csv",
                 "passwords_formated_data.csv" };
 
-        CustomArray<String> data = fh.read(filenames[0], 50);
+        CustomArray<String> data = fh.read(filenames[0], 10);
+        System.out.println(data.getSize());
+        
 
         data.update(0, data.get(0) + ",classification");
+        
         // generates passwords_classifier
         for (int i = 1; i < data.getSize(); i++) {
             String passTier = p1.classifyPassword(((String) data.get(i)).split(",", 4)[1], true);

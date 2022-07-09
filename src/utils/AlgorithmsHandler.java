@@ -18,12 +18,11 @@ import src.interfaces.Sorter;
 public class AlgorithmsHandler {
     private static FileHandler fh = new FileHandler();
 
-    private static Sorter[] sorters = new Sorter[] { new Bubble(), new Bucket(), new Counting(), new Heap(),
-            new Insertion(),
-            new Selection(), new Insertion(),
+    private static Sorter[] sorters = new Sorter[] { new Bubble(), new Bucket(), new Counting(),
+            new Heap(), new Insertion(), new MedianQuickSort(),
             new Merge(), new Quick(), new Radix(), new Selection() };
 
-    private static Sorter[] sorters2 = new Sorter[] { new MedianQuickSort() };
+    // private static Sorter[] sorters = new Sorter[] { new MedianQuickSort() };
 
     private static void routine(String title, Sorter sorter, int permutation, CustomArray<String> mainArray,
             int[] data,
@@ -98,6 +97,66 @@ public class AlgorithmsHandler {
         ArrayHandler.mirrorArray(data, originalData);
     }
 
+    public static void sortData(CustomArray<String> mainArray) {
+        int size = 1;
+        int[] dates = new int[mainArray.getSize() - 1],
+                months = new int[mainArray.getSize() - 1], lenghts = new int[mainArray.getSize() - 1];
+
+        // String prefix, string case, int index
+        // 3 sort date
+        Pattern pattern = Pattern.compile("[^,]*,");
+
+        String[] line;
+
+        int limit = mainArray.getSize() > 100000 ? mainArray.getSize() - 1 : mainArray.getSize();
+        for (int j = 1; j < limit; j++) {
+
+            int count = 0;
+            Matcher matcher = pattern.matcher(mainArray.get(j));
+            while (matcher.find())
+                count++;
+
+            switch (count) {
+                case 4:
+                    // System.out.println(count);
+                    line = ((String) mainArray.get(j)).split(",", 5);
+                    // ArrayHandler.printArray(line);
+                    break;
+                case 5:
+                    line = ((String) mainArray.get(j)).split(",", 6);
+
+                    line[1] = line[1] + ",";
+                    for (int i = 1; i < 5; i++)
+                        line[i] = line[i + 1];
+
+                    line = ArrayHandler.sliceArray(line, 0, 5);
+
+                    break;
+                default:
+                    line = new String[5];
+                    break;
+            }
+
+            dates[j - 1] = dateToInt(line[3]);
+            months[j - 1] = Integer.parseInt(line[3].substring(5, 7));
+            lenghts[j - 1] = Integer.parseInt(line[2]);
+
+        }
+
+        for (int i = 0; i < sorters.length; i++) {
+            for (int j = 0; j < 1; j++) {
+                System.out.println(sorters[i].getClass().getSimpleName() + "Sort");
+                routine("length", sorters[i], j, mainArray, lenghts, size);
+                routine("mes", sorters[i], j, mainArray, months, size);
+                routine("data", sorters[i], j, mainArray, dates, size);
+                System.out.println();
+
+            }
+
+        }
+
+    }
+
     private static int dateToInt(String line) {
         String[] date = line.split(" ", 2)[0].split("-", 3);
         // System.out.println(ArrayHandler.concatArray(date));
@@ -121,60 +180,4 @@ public class AlgorithmsHandler {
         return media;
     }
 
-    public static void sortData(CustomArray<String> mainArray) {
-        int size = 1;
-        int[] dates = new int[mainArray.getSize() - 1],
-                months = new int[mainArray.getSize() - 1], lenghts = new int[mainArray.getSize() - 1];
-
-        // String prefix, string case, int index
-        // 3 sort date
-        Pattern pattern = Pattern.compile("[^,]*,");
-        
-        String[] line;
-        for (int j = 1; j < mainArray.getSize(); j++) {
-            System.out.println(mainArray.get(j));
-
-            int count = 0;
-            Matcher matcher = pattern.matcher(mainArray.get(j));
-            while (matcher.find()){
-                count++;
-            }
-            
-            
-            switch (count) {
-                case 4:
-                    line = ((String) mainArray.get(j)).split(",", 5);
-                    break;
-                case 5:
-                    line = ((String) mainArray.get(j)).split(",", 6);
-                    line[1] = line[1] + ",";
-                    for (int i = 1; i < 6; i++)
-                        line[i] = line[i + 1];
-                    line = ArrayHandler.sliceArray(line, 0, 5);
-
-                    break;
-                default:
-                    line = new String[5];
-                    break;
-            }
-
-            dates[j - 1] = dateToInt(line[3]);
-            months[j - 1] = Integer.parseInt(line[3].substring(5, 7));
-            lenghts[j - 1] = Integer.parseInt(line[2]);
-
-        }
-
-        for (int i = 0; i < sorters.length; i++) {
-            for (int j = 0; j < 3; j++) {
-                System.out.println(sorters[i].getClass().getSimpleName() + "Sort");
-                routine("length", sorters[i], j, mainArray, lenghts, size);
-                routine("mes", sorters[i], j, mainArray, months, size);
-                routine("data", sorters[i], j, mainArray, dates, size);
-                System.out.println();
-
-            }
-
-        }
-
-    }
 }
