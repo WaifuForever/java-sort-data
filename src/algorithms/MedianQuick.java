@@ -3,7 +3,7 @@ package src.algorithms;
 import src.interfaces.Sorter;
 import src.utils.ArrayHandler;
 
-public class MedianQuickSort implements Sorter {
+public class MedianQuick implements Sorter {
 
 	public static void quickSort(int[] arr, int low, int high) {
 		if (high - low + 1 <= 3)
