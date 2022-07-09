@@ -1,6 +1,7 @@
 package src.utils;
 
 import java.util.regex.Pattern;
+import java.io.IOException;
 import java.util.regex.Matcher;
 
 import src.algorithms.Bubble;
@@ -8,7 +9,7 @@ import src.algorithms.Bucket;
 import src.algorithms.Counting;
 import src.algorithms.Heap;
 import src.algorithms.Insertion;
-import src.algorithms.MedianQuickSort;
+import src.algorithms.MedianQuick;
 import src.algorithms.Merge;
 import src.algorithms.Quick;
 import src.algorithms.Radix;
@@ -19,7 +20,7 @@ public class AlgorithmsHandler {
     private static FileHandler fh = new FileHandler();
 
     private static Sorter[] sorters = new Sorter[] { new Bubble(), new Bucket(), new Counting(),
-            new Heap(), new Insertion(), new MedianQuickSort(),
+            new Heap(), new Insertion(), new MedianQuick(),
             new Merge(), new Quick(), new Radix(), new Selection() };
 
     // private static Sorter[] sorters = new Sorter[] { new MedianQuickSort() };
@@ -81,10 +82,17 @@ public class AlgorithmsHandler {
 
         // ArrayHandler.printArray(mainArray);
         // System.out.println();
-        ArrayHandler.printArray(averageTime(time, 3));
+        long[] timeArray = averageTime(time, 3);
+        try {
+            fh.writeTime(sorter.getClass().getSimpleName(), timeArray);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        ArrayHandler.printArray(timeArray);
 
         title = "passwords_" + title + "_" + sorter.getClass().getSimpleName() + "Sort_" + cases[permutation] + "_.csv";
-        fh.write(title, mainArray, 0, true);
+        fh.write(title + "_" + cases[permutation], mainArray, 0, true);
 
         indexArray = ArrayHandler.generateIndexArray(ArrayHandler.copyArray(data),
                 ArrayHandler.copyArray(originalData));
@@ -98,7 +106,7 @@ public class AlgorithmsHandler {
     }
 
     public static void sortData(CustomArray<String> mainArray) {
-        int size = 1;
+        int size = 100;
         int[] dates = new int[mainArray.getSize() - 1],
                 months = new int[mainArray.getSize() - 1], lenghts = new int[mainArray.getSize() - 1];
 
@@ -144,7 +152,7 @@ public class AlgorithmsHandler {
         }
 
         for (int i = 0; i < sorters.length; i++) {
-            for (int j = 0; j < 1; j++) {
+            for (int j = 0; j < 3; j++) {
                 System.out.println(sorters[i].getClass().getSimpleName() + "Sort");
                 routine("length", sorters[i], j, mainArray, lenghts, size);
                 routine("mes", sorters[i], j, mainArray, months, size);

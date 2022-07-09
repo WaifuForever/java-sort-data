@@ -1,7 +1,12 @@
 package src.utils;
 
+import java.io.BufferedWriter;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.Scanner;
 
 import src.interfaces.Callable;
@@ -111,6 +116,22 @@ public class FileHandler {
             System.out.println(e.getMessage());
         }
 
+    }
+
+    public void writeTime(String title, long[] array) throws IOException {
+        try (PrintWriter newFile =  new PrintWriter(new BufferedWriter(new FileWriter("output/benchmark.csv", true)))) {
+           
+            for (int i = 0; i < array.length - 1; i++) {
+
+                title += "," + String.valueOf(array[i]);
+            }
+
+            newFile.println(title);
+
+        } catch (FileNotFoundException | UnsupportedEncodingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     private static String formateDate(String date) {// 2016-12-18 03:21:51
