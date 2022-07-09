@@ -90,6 +90,7 @@ public class AlgorithmsHandler {
         // String prefix, string case, int index
         // 3 sort date
         Pattern pattern = Pattern.compile("[^,]*,");
+        Pattern emptyPattern = Pattern.compile("[,]{2}");
 
         String[] line;
 
@@ -104,7 +105,9 @@ public class AlgorithmsHandler {
             switch (count) {
                 case 4:
                     line = ((String) mainArray.get(j)).split(",", 5);
-
+                    if(emptyPattern.matcher(mainArray.get(j)).find()){
+                        line[2]= "0";
+                    }
                     break;
                 case 5:
                     line = ((String) mainArray.get(j)).split(",", 6);
