@@ -34,12 +34,6 @@ public class AlgorithmsHandler {
 
         int[] originalData = ArrayHandler.copyArray(data);
 
-        /*
-         * System.out.println("The way it is:");
-         * ArrayHandler.printArray(mainArray);
-         * System.out.println("\n");
-         */
-
         for (int i = 0; i < circleSize; i++) {
 
             ArrayHandler.shuffleArray(data);
@@ -62,48 +56,29 @@ public class AlgorithmsHandler {
 
             time[i] = endTime - startTime;
         }
-        /*
-         * System.out.println("Arrays relation");
-         * System.out.printf("OriginalData: ");
-         * ArrayHandler.printArray(originalData);
-         * System.out.printf("Sorted Data: ");
-         * ArrayHandler.printArray(data);
-         */
 
         int[] indexArray = ArrayHandler.generateIndexArray(ArrayHandler.copyArray(originalData),
                 ArrayHandler.copyArray(data));
-        /*
-         * System.out.printf("indexArray: ");
-         * ArrayHandler.printArray(indexArray);
-         * System.out.println();
-         */
-        ArrayHandler.reorderArray(indexArray, mainArray, 1);
-        // System.out.println("Sorted:");
 
-        // ArrayHandler.printArray(mainArray);
-        // System.out.println();
+        ArrayHandler.reorderArray(indexArray, mainArray, 1);
+
         long[] timeArray = averageTime(time, 3);
         title = "passwords_" + title + "_" + sorter.getClass().getSimpleName() + "Sort_" + cases[permutation] + "_.csv";
-        
+
         try {
             fh.writeTime(title, timeArray);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
+
             e.printStackTrace();
         }
         ArrayHandler.printArray(timeArray);
 
-       
         fh.write(title, mainArray, 0, true);
 
         indexArray = ArrayHandler.generateIndexArray(ArrayHandler.copyArray(data),
                 ArrayHandler.copyArray(originalData));
         ArrayHandler.reorderArray(indexArray, mainArray, 1);
-        /*
-         * System.out.println("The way it was:");
-         * ArrayHandler.printArray(mainArray);
-         * System.out.println("\n");
-         */
+
         ArrayHandler.mirrorArray(data, originalData);
     }
 
@@ -128,9 +103,8 @@ public class AlgorithmsHandler {
 
             switch (count) {
                 case 4:
-                    // System.out.println(count);
                     line = ((String) mainArray.get(j)).split(",", 5);
-                    // ArrayHandler.printArray(line);
+
                     break;
                 case 5:
                     line = ((String) mainArray.get(j)).split(",", 6);

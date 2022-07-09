@@ -52,7 +52,8 @@ public class MedianQuick implements Sorter {
 	public void bestCase(int[] arr) {
 		// Best Case is when the pivot element divides the list into two equal halves by
 		// coming exactly in the middle position.
-		// partition(arr, 0, medianPivot(arr, 0, arr.length - 1));
+		// the current implementation may ease this process, but the absolute best case
+		// depends upon the position of the elements.
 
 	}
 

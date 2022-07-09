@@ -20,17 +20,13 @@ public class Bubble implements Sorter {
 
     @Override
     public void bestCase(int[] arr) {
-        // Best Case is when the pivot element divides the list into two equal halves by
-        // coming exactly in the middle position.
+        // when the array is already sorted
         sortArray(arr);
     }
 
     @Override
     public void worstCase(int[] arr) {
-        // Already sorted worst case occurs when the pivot element is either greatest or
-        // smallest element.
-        // The current implementation will already perform the worstcase when the array
-        // is already sorted
+       // reversed sorted array
         sortArray(arr);
         ArrayHandler.reverseArrayInPlace(arr);
     }

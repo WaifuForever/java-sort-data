@@ -8,32 +8,23 @@ public class Quick implements Sorter {
     // method to find the partition position
     private int partition(int array[], int low, int high) {
 
-        // choose the rightmost element as pivot
         int pivot = array[high];
 
-        // pointer for greater element
         int i = (low - 1);
 
-        // traverse through all elements
-        // compare each element with pivot
         for (int j = low; j < high; j++) {
             if (array[j] <= pivot) {
 
-                // if element smaller than pivot is found
-                // swap it with the greater element pointed by i
                 i++;
 
-                // swapping element at i with element at j
                 ArrayHandler.swap(array, i, j);
 
             }
 
         }
 
-        // swapt the pivot element with the greater element specified by i
         ArrayHandler.swap(array, i + 1, high);
 
-        // return the position from where partition is done
         return (i + 1);
     }
 

@@ -1,7 +1,6 @@
 package src.algorithms;
 
 import src.interfaces.Sorter;
-import src.utils.ArrayHandler;
 
 public class Heap implements Sorter {
 

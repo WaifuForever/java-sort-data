@@ -13,30 +13,14 @@ import src.interfaces.Callable;
 
 public class FileHandler {
 
-    // String fileNameDownloaded = "passwords.csv";
-
     public CustomArray<String> read(String filename) {
         CustomArray<String> data = new CustomArray<String>();
         try (FileInputStream inputStream = new FileInputStream("output/" + filename);
                 Scanner sc = new Scanner(inputStream, "UTF-8");) {
-            // File passwords_classifier = new File("passwords_classifier.csv");
 
-            // String lineOne = sc.nextLine();
-
-            // PrintWriter passwords_classifier = new PrintWriter(fileNameClassifier,
-            // "UTF-8");
-            // PrintWriter passwords_formated_data = new PrintWriter(fileNameFormatedDate,
-            // "UTF-8");
-            // passwords_classifier.println(lineOne.concat(",classification"));
-            // passwords_formated_data.println(lineOne.concat(",classification"));
-            while (sc.hasNextLine()) {
+            while (sc.hasNextLine())
                 data.add(sc.nextLine());
 
-                // String formatedDate = formateDate(lineArray[3]);
-                // System.out.println(line);
-            }
-
-            // note that Scanner suppresses exceptions
             if (sc.ioException() != null) {
                 throw sc.ioException();
             }
@@ -51,16 +35,7 @@ public class FileHandler {
         CustomArray<String> data = new CustomArray<String>();
         try (FileInputStream inputStream = new FileInputStream("output/" + filename);
                 Scanner sc = new Scanner(inputStream, "UTF-8");) {
-            // File passwords_classifier = new File("passwords_classifier.csv");
 
-            // String lineOne = sc.nextLine();
-
-            // PrintWriter passwords_classifier = new PrintWriter(fileNameClassifier,
-            // "UTF-8");
-            // PrintWriter passwords_formated_data = new PrintWriter(fileNameFormatedDate,
-            // "UTF-8");
-            // passwords_classifier.println(lineOne.concat(",classification"));
-            // passwords_formated_data.println(lineOne.concat(",classification"));
             int i = 0;
             while (sc.hasNextLine()) {
                 if (i > limit)
@@ -68,11 +43,9 @@ public class FileHandler {
                 data.add(sc.nextLine());
 
                 i++;
-                // String formatedDate = formateDate(lineArray[3]);
-                // System.out.println(line);
+
             }
 
-            // note that Scanner suppresses exceptions
             if (sc.ioException() != null) {
                 throw sc.ioException();
             }
@@ -119,8 +92,8 @@ public class FileHandler {
     }
 
     public void writeTime(String title, long[] array) throws IOException {
-        try (PrintWriter newFile =  new PrintWriter(new BufferedWriter(new FileWriter("output/benchmark.xlsx", true)))) {
-           
+        try (PrintWriter newFile = new PrintWriter(new BufferedWriter(new FileWriter("output/benchmark.csv", true)))) {
+
             title = title.substring(0, title.length() - 4);
             for (int i = 0; i < array.length; i++) {
 
@@ -130,13 +103,12 @@ public class FileHandler {
             newFile.println(title);
 
         } catch (FileNotFoundException | UnsupportedEncodingException e) {
-            // TODO Auto-generated catch block
+
             e.printStackTrace();
         }
     }
 
-    private static String formateDate(String date) {// 2016-12-18 03:21:51
-        // System.out.println(date.split(" ", 2)[0]);
+    private static String formateDate(String date) {
         String[] temp;
         if (date.matches("^[0-9]{8}$")) {
             temp = new String[] { date.substring(0, 4), date.substring(4, 6), date.substring(6) };
@@ -147,22 +119,14 @@ public class FileHandler {
 
     }
 
-    public static void main(String[] args) {
-        FileHandler fh = new FileHandler();
-        CustomArray<String> temp = fh.read("passwords.csv");
-        System.out.println(temp.get(0));
-
-        /*
-         * for (int i = 0; i < arr.length - 1; i++) {
-         * arr[i] = ((String[]) temp.get(0))[i];
-         * }
-         * arr[arr.length - 1] = "classification";
-         * temp.update(0, arr);
-         * System.out.println(temp.getSize());
-         * for (int i = 0; i < temp.getSize(); i++) {
-         * System.out.println(Arrays.toString((String[]) temp.get(i)));
-         * }
-         */
-    }
-
+    /*
+     * public static void main(String[] args) {
+     * FileHandler fh = new FileHandler();
+     * CustomArray<String> temp = fh.read("passwords.csv");
+     * System.out.println(temp.get(0));
+     * 
+     * 
+     * 
+     * }
+     */
 }

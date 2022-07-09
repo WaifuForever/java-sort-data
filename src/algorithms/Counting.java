@@ -25,8 +25,6 @@ public class Counting implements Sorter {
             arr2[i] = arr2[i] + arr2[i - 1];
 
         for (int i = arr.length - 1; i >= 0; i--) {
-            // System.out.printf("arr[%d] = %d | arr2[%d] = %d | output[%d] = %d\n", i,
-            // arr[i], arr[i], arr2[arr[i]], arr2[arr[i]], output[arr2[arr[i]]-1]);
             output[arr2[arr[i]] - 1] = arr[i];
             arr2[arr[i]]--;
 
@@ -43,17 +41,13 @@ public class Counting implements Sorter {
 
     @Override
     public void bestCase(int[] arr) {
-        // Best Case is when the pivot element divides the list into two equal halves by
-        // coming exactly in the middle position.
+        //CONSTANT the smaller the elements the better
         sortArray(arr);
     }
 
     @Override
     public void worstCase(int[] arr) {
-        // Already sorted worst case occurs when the pivot element is either greatest or
-        // smallest element.
-        // The current implementation will already perform the worstcase when the array
-        // is already sorted
+        //CONSTANT the bigger the elements the worst
         sortArray(arr);
         ArrayHandler.reverseArrayInPlace(arr);
     }

@@ -100,8 +100,7 @@ public class Merge implements Sorter {
 
     @Override
     public void bestCase(int[] arr) {
-        // TODO Auto-generated method stub
-
+        // we would need a permutation that allows the merge sort to make fewest swaps possible
     }
 
     @Override

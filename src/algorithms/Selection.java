@@ -12,17 +12,15 @@ public class Selection implements Sorter {
         for (int i = 0; i < arr.length - 1; i++) {
             int smallest = i;
             for (int j = i + 1; j < arr.length; j++) {
-                // System.out.printf("%d > %d\n", arr[smallest], arr[j]);
+
                 if (arr[smallest] > arr[j])
                     smallest = j;
 
             }
-            // System.out.printf("smallest: %d [%d]", arr[smallest], smallest);
+
             swap(arr, smallest, i);
-            // System.out.printf("%s\n", Arrays.toString(arr));
 
         }
-        // System.out.println();
 
     }
 
@@ -35,12 +33,12 @@ public class Selection implements Sorter {
     public void bestCase(int[] arr) {
         // array already sorted
         sortArray(arr);
-        
+
     }
 
     @Override
     public void worstCase(int[] arr) {
-        // reversed array
+        // reversed sorted array
         sortArray(arr);
         ArrayHandler.reverseArrayInPlace(arr);
     }

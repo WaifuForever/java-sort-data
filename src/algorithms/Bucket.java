@@ -74,17 +74,12 @@ public class Bucket implements Sorter {
             buckets.add(new intArray());
 
         // Add elements into the buckets
-        for (int i = 0; i < arr.length; i++) {
+        for (int i = 0; i < arr.length; i++)
             buckets.get((arr[i] / (int) Math.pow(chunkSize, k - 1))).add(arr[i]);
-            // System.out.println((arr[i] / (int) Math.pow(chunkSize, k - 1)));
-        }
 
         // Sort the elements of each bucket
-        for (int i = 0; i < chunkSize; i++) {
-
+        for (int i = 0; i < chunkSize; i++)
             new Radix().sortArray(buckets.get(i).getArray());
-
-        }
 
         // Get the sorted array
         int index = 0;
@@ -152,13 +147,14 @@ public class Bucket implements Sorter {
     @Override
     public void bestCase(int[] arr) {
         // is when the elements are evenly grouped in the buckets
-        // constant
+        // linear
         sortArray(arr);
     }
 
     @Override
     public void worstCase(int[] arr) {
         // is when all the elements are placed in a single bucket
+        // linear
         sortArray(arr);
         ArrayHandler.reverseArrayInPlace(arr);
     }

@@ -62,8 +62,6 @@ public class CustomArray<T> {
     public void add(T element) {
         if (size == array.length)
             doubleArray();
-        //if (size == array.length)
-          //  doubleArray((Class<T>) array.getClass());
 
         array[size] = element;
         size++;

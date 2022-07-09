@@ -39,13 +39,9 @@ public class ArrayHandler {
     public static <T> void reorderArray(int positions[], CustomArray<T> mainArray, int skip) {
         CustomArray<T> temp = new CustomArray<T>(mainArray.getArray());
 
-        for (int i = 0; i < positions.length; i++) {
-            // newCustomArray.add(mainArray.get(ArrayHandler.sequentialSearch(oldpositions,
-            // positions[i]) +
-            // skip));
+        for (int i = 0; i < positions.length; i++)
             mainArray.update(i + skip, temp.get(positions[i] + skip));
 
-        }
     }
 
     public static int[] generateIndexArray(int[] original, int[] doppelganger) {
