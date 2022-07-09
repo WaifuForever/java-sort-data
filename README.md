@@ -6,7 +6,19 @@ Please read our Guidelines to see what this project is about:
 
 ## How to Run
    When we actually have some code here, we're going to explain how to run it.
+### Requirements
+- java 8+
+- javac with equivalent version of java
 
+### Compile
+```bash
+javac src/App.java
+```
+
+### Execution
+```bash
+java src.App
+```
 ## Roadmap
    We're going to set goals here, basically we are going to describe all features of the application and say if they're complete or not.
 
